@@ -42,8 +42,7 @@ exports.getSQLConnection = function() {
         database: sqlConfig.database,
         user: sqlConfig.user,
         password: sqlConfig.password,
-        stringifyObjects: true,
-        debug: true
+        stringifyObjects: true
     });
     
     handleDisconnect(conn);

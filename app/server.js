@@ -1,7 +1,6 @@
 'use_strict';
 
 var express = require('express'),
-    sql = require('tds'), // sql library
     app = module.exports.app = express(),
     sqlConfig = {
         "host": process.env.RDS_HOSTNAME,
@@ -28,8 +27,9 @@ apiConversation = require('./scripts/server/conversation.js');
 apiUtil = require('./scripts/server/util.js');
 
 app.configure(function () {
+    'use strict';
 	app.use(express.favicon());
-	app.use(express.bodyParser({uploadDir:'./uploads'}));
+	app.use(express.bodyParser({uploadDir: './uploads'}));
 	app.use(express.logger('dev'));  //tiny, short, default
     app.use(express.cookieParser());
     app.use(express.session({ secret: '31206tokoshinchrongraw543788' }));
@@ -60,6 +60,7 @@ app.get(API_PATH + 'conversation/common-room/:commonRoomID', apiConversation.get
 // utilities
 app.get(API_PATH + 'signS3put/:s3objecttype/:s3objectname', apiUtil.uploadFile);
 
-app.listen(port, function() {
+app.listen(port, function () {
+    'use strict';
     console.log("Listening on " + port);
 });
