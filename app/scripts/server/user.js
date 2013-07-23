@@ -14,7 +14,7 @@ exports.getScribdenUserByUsername = function(username) {
                                       'ModDate ' +
                               'FROM ScribdenUser ' +
                               'WHERE Username = ? ' +
-                                  'AND Active = 1',
+                                  'AND Active = true',
                             [username]);
 }
 
@@ -34,7 +34,7 @@ exports.getScribdenUserById = function(id) {
                                       'ModDate ' +
                               'FROM ScribdenUser ' +
                               'WHERE ScribdenUserKey = ? '+
-                                  'AND Active = 1',
+                                  'AND Active = true',
                                 [id]);
 }
 

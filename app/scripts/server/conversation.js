@@ -21,8 +21,8 @@ exports.getCommonRoomConversations = function(commonRoomID) {
                                 'WHERE ' +
                                     'C.fCommonRoomKey = @CommonRoomKey ' +
                                     'AND C.IsBranch = 0 ' +
-                                    'AND C.Active = 1 ' +
-                                    'AND P.Active = 1 ' +
+                                    'AND C.Active = true ' +
+                                    'AND P.Active = true ' +
                                 'GROUP BY C.ConversationKey, C.IsClosed, P.Content, P.fScribdenUserKey, SU.Username, C.ModDate ' +
                                 'ORDER BY C.ModDate DESC',
                                 [commonRoomID]);

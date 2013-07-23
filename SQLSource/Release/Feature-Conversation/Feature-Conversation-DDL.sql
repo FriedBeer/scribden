@@ -12,7 +12,9 @@ BEGIN
 /********************************** Remove Constraints on table Conversation ********************************************/
 
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'Conversation' AND CONSTRAINT_TYPE = 'PRIMARY KEY') > 0 THEN
-	ALTER TABLE Conversation DROP PRIMARY KEY;
+	ALTER TABLE Conversation
+	CHANGE ConversationKey ConversationKey INT,
+	DROP PRIMARY KEY;
 END IF;
 
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'Conversation' AND CONSTRAINT_TYPE = 'FOREIGN KEY' AND CONSTRAINT_NAME = 'FK_Conversation_fCommonRoomKey') > 0 THEN
@@ -22,7 +24,9 @@ END IF;
 /********************************** Remove Constraints and drop table Post ********************************************/
 
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'Post' AND CONSTRAINT_TYPE = 'PRIMARY KEY') > 0 THEN
-	ALTER TABLE Post DROP PRIMARY KEY;
+	ALTER TABLE Post
+	CHANGE PostKey PostKey INT,
+	DROP PRIMARY KEY;
 END IF;
 
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'Post' AND CONSTRAINT_TYPE = 'FOREIGN KEY' AND CONSTRAINT_NAME = 'FK_Post_fScribdenUserKey') > 0 THEN
@@ -37,14 +41,16 @@ IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME =
 	ALTER TABLE Post DROP FOREIGN KEY FK_Post_fChildConversationKey;
 END IF;
 
-IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'Post') > 0 THEN
+IF (SELECT COUNT(*) FROM information_schema.tables WHERE TABLE_NAME = 'Post') > 0 THEN
 	DROP TABLE Post;
 END IF;
 
 /********************************** Remove Constraints and drop table FollowedConversation ********************************************/
 
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'FollowedConversation' AND CONSTRAINT_TYPE = 'PRIMARY KEY') > 0 THEN
-	ALTER TABLE FollowedConversation DROP PRIMARY KEY;
+	ALTER TABLE FollowedConversation
+	CHANGE FollowedConversationKey FollowedConversationKey INT,
+	DROP PRIMARY KEY;
 END IF;
 
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'FollowedConversation' AND CONSTRAINT_TYPE = 'FOREIGN KEY' AND CONSTRAINT_NAME = 'FK_FollowedConversation_fScribdenUserKey') > 0 THEN
@@ -55,13 +61,13 @@ IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME =
 	ALTER TABLE FollowedConversation DROP FOREIGN KEY FK_FollowedConversation_fConversationKey;
 END IF;
 
-IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'FollowedConversation') > 0 THEN
+IF (SELECT COUNT(*) FROM information_schema.tables WHERE TABLE_NAME = 'FollowedConversation') > 0 THEN
 	DROP TABLE FollowedConversation;
 END IF;
 
 /*********************************************** Drop table Conversation *******************************************************/
 
-IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'Conversation') > 0 THEN
+IF (SELECT COUNT(*) FROM information_schema.tables WHERE TABLE_NAME = 'Conversation') > 0 THEN
 	DROP TABLE Conversation;
 END IF;
 
@@ -76,7 +82,7 @@ Active boolean NOT NULL,
 ModDate timestamp NOT NULL,
 CONSTRAINT FK_Conversation_fCommonRoomKey FOREIGN KEY (fCommonRoomKey) REFERENCES CommonRoom (CommonRoomKey)
 	ON DELETE CASCADE
-);
+) ENGINE=InnoDB;
 
 ALTER TABLE Conversation ALTER COLUMN IsBranch SET DEFAULT false;
 ALTER TABLE Conversation ALTER COLUMN IsClosed SET DEFAULT false;
@@ -98,7 +104,7 @@ CONSTRAINT FK_Conversation_fParentConversationKey FOREIGN KEY (fParentConversati
 	ON DELETE CASCADE,
 CONSTRAINT FK_Conversation_fChildConversationKey FOREIGN KEY (fChildConversationKey) REFERENCES Conversation (ConversationKey)
 	ON DELETE SET NULL
-);
+) ENGINE=InnoDB;
 
 ALTER TABLE Conversation ALTER COLUMN Active SET DEFAULT true;
 
@@ -113,8 +119,8 @@ ModDate timestamp NOT NULL,
 CONSTRAINT FK_FollowedConversation_fScribdenUserKey FOREIGN KEY (fScribdenUserKey) REFERENCES ScribdenUser (ScribdenUser)
 	ON DELETE CASCADE,
 CONSTRAINT FK_Conversation_fConversationKey FOREIGN KEY (fConversationKey) REFERENCES Conversation (ConversationKey)
-	ON DELETE CASCADE,
-);
+	ON DELETE CASCADE
+) ENGINE=InnoDB;
 
 END$
 

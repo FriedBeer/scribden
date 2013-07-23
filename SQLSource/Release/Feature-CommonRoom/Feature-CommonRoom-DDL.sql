@@ -12,7 +12,9 @@ BEGIN
 /********************************** Remove Constraints and drop table Members ********************************************/
 
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'Members' AND CONSTRAINT_TYPE = 'PRIMARY KEY') > 0 THEN
-	ALTER TABLE Members DROP PRIMARY KEY;
+	ALTER TABLE Members
+	CHANGE MembersKey MembersKey INT,
+	DROP PRIMARY KEY;
 END IF;
 
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'Members' AND CONSTRAINT_TYPE = 'FOREIGN KEY' AND CONSTRAINT_NAME = 'FK_Members_fScribdenUserKey') > 0 THEN
@@ -27,72 +29,82 @@ IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME =
 	ALTER TABLE Members DROP FOREIGN KEY FK_Members_fCommonRoomKey;
 END IF;
 
-IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'Members') > 0 THEN
+IF (SELECT COUNT(*) FROM information_schema.tables WHERE TABLE_NAME = 'Members') > 0 THEN
 	DROP TABLE Members;
 END IF;
 
 /********************************** Remove Constraints and drop table CommonRoom ********************************************/
 
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'CommonRoom' AND CONSTRAINT_TYPE = 'PRIMARY KEY') > 0 THEN
-	ALTER TABLE CommonRoom DROP PRIMARY KEY;
+	ALTER TABLE CommonRoom
+	CHANGE CommonRoomKey CommonRoomKey INT,
+	DROP PRIMARY KEY;
 END IF;
 
-IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'CommonRoom') > 0 THEN
+IF (SELECT COUNT(*) FROM information_schema.tables WHERE TABLE_NAME = 'CommonRoom') > 0 THEN
 	DROP TABLE CommonRoom;
 END IF;
 
 /********************************** Remove Constraints and drop table ListUserStatus ********************************************/
 
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'ListUserStatus' AND CONSTRAINT_TYPE = 'PRIMARY KEY') > 0 THEN
-	ALTER TABLE ListUserStatus DROP PRIMARY KEY;
+	ALTER TABLE ListUserStatus
+	CHANGE ListUserStatusKey ListUserStatusKey INT,
+	DROP PRIMARY KEY;
 END IF;
 
-IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'ListUserStatus') > 0 THEN
+IF (SELECT COUNT(*) FROM information_schema.tables WHERE TABLE_NAME = 'ListUserStatus') > 0 THEN
 	DROP TABLE ListUserStatus;
 END IF;
 
 /********** Create CommonRoom Table ************/
 
 CREATE TABLE CommonRoom(
-CommonRoomKey int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+CommonRoomKey int unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
 Name varchar(255) NOT NULL,
 Description varchar(255) NULL,
 isPublic boolean NOT NULL,
 Banner varchar(255) NULL,
 HomeBG varchar(255) NULL,
 Active boolean NOT NULL,
-ModDate timestamp NOT NULL
-);
+ModDate timestamp NOT NULL,
+INDEX IDX_CommonRoom_CommonRoomKey (CommonRoomKey)
+) ENGINE=InnoDB;
 
 ALTER TABLE CommonRoom ALTER COLUMN Active SET DEFAULT true;
 
 /********** Create ListUserStatus Table ************/
 
 CREATE TABLE ListUserStatus(
-ListUserStatusKey int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ListUserStatusKey int unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
 Status varchar(255) NOT NULL,
 Active boolean NOT NULL,
-ModDate timestamp NOT NULL
-);
+ModDate timestamp NOT NULL,
+INDEX IDX_ListUserStatus_ListUserStatusKey (ListUserStatusKey)
+) ENGINE=InnoDB;
 
 ALTER TABLE ListUserStatus ALTER COLUMN Active SET DEFAULT true;
 
 /********** Create Members Table ************/
 
 CREATE TABLE Members(
-MembersKey int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-fScribdenUserKey int NOT NULL,
-fListUserStatusKey int NOT NULL,
-fCommonRoomKey int NOT NULL,
+fScribdenUserKey int unsigned NOT NULL,
+fListUserStatusKey int unsigned NOT NULL,
+fCommonRoomKey int unsigned NOT NULL,
+MembersKey int unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
 Approved boolean NOT NULL,
 isModerator boolean NOT NULL,
 Active boolean NOT NULL,
 ModDate timestamp NOT NULL,
+INDEX IDX_Members_MembersKey (MembersKey),
+INDEX IDX_Members_fScribdenUserKey (fScribdenUserKey),
+INDEX IDX_Members_fListUserStatusKey (fListUserStatusKey),
+INDEX IDX_Members_fCommonRoomKey (fCommonRoomKey),
 CONSTRAINT FK_Members_fScribdenUserKey FOREIGN KEY (fScribdenUserKey) REFERENCES ScribdenUser (ScribdenUserKey)
 	ON DELETE CASCADE,
 CONSTRAINT FK_Members_fListUserStatusKey FOREIGN KEY (fListUserStatusKey) REFERENCES ListUserStatus (ListUserStatusKey)
 	ON DELETE SET NULL,
-CONSTRAINT FK_Members_fCommonRoomKey FOREIGN KEY (fCommonRoomKey) REFERENCES CommonRoom (fCommonRoomKey)
+CONSTRAINT FK_Members_fCommonRoomKey FOREIGN KEY (fCommonRoomKey) REFERENCES CommonRoom (CommonRoomKey)
 	ON DELETE CASCADE
 ) ENGINE=InnoDB;
 

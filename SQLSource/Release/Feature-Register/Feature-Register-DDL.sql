@@ -12,7 +12,10 @@ CREATE PROCEDURE FeatureRegisterDDL()
 BEGIN
 
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'ScribdenUser' AND CONSTRAINT_TYPE = 'PRIMARY KEY') > 0 THEN
-	ALTER TABLE ScribdenUser DROP PRIMARY KEY;
+	/* Drop the AUTO_INCREMENT first, then the primary key */
+	ALTER TABLE ScribdenUser
+	CHANGE ScribdenUserKey ScribdenUserKey INT,
+	DROP PRIMARY KEY;
 END IF;
 
 IF (SELECT COUNT(*) FROM information_schema.tables WHERE TABLE_NAME = 'ScribdenUser') > 0 THEN
@@ -20,12 +23,13 @@ IF (SELECT COUNT(*) FROM information_schema.tables WHERE TABLE_NAME = 'ScribdenU
 END IF;
 
 CREATE TABLE ScribdenUser(
-ScribdenUserKey int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ScribdenUserKey int unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
 Username varchar(32) NOT NULL,
 Password varchar(32) NOT NULL,
 Email varchar(255) NOT NULL,
 Active boolean NOT NULL,
-ModDate timestamp NOT NULL
+ModDate timestamp NOT NULL,
+INDEX IDX_ScribdenUser_ScribdenUserKey (ScribdenUserKey)
 ) ENGINE=InnoDB;
 
 ALTER TABLE ScribdenUser ALTER COLUMN Active SET DEFAULT true;

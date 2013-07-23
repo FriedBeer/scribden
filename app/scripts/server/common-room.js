@@ -21,9 +21,9 @@ exports.getCommonRoomsByScribdenUser = function(userid) {
                                     'ON M.fCommonRoomKey = CR.CommonRoomKey ' +
                                 'WHERE ' +
                                     'M.fScribdenUserKey = ? ' +
-                                    'AND M.Approved = 1 ' +
-                                    'AND CR.Active = 1 ' +
-                                    'AND M.Active = 1 ',
+                                    'AND M.Approved = true ' +
+                                    'AND CR.Active = true ' +
+                                    'AND M.Active = true ',
                                 [userid]);
 }
 
@@ -50,8 +50,8 @@ exports.getUserCommonRoomById = function(commonRoomID, userid) {
                                 'WHERE ' +
                                     'CR.CommonRoomKey = ? ' +
                                     'AND M.fScribdenUserKey = ? ' +
-                                    'AND CR.Active = 1 ' +
-                                    'AND M.Active = 1',
+                                    'AND CR.Active = true ' +
+                                    'AND M.Active = true',
                                     [commonRoomID, userid]);
 }
 
