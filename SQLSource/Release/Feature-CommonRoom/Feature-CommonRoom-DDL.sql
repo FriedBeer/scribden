@@ -13,7 +13,7 @@ BEGIN
 
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'Members' AND CONSTRAINT_TYPE = 'PRIMARY KEY') > 0 THEN
 	ALTER TABLE Members
-	CHANGE MembersKey MembersKey INT,
+	CHANGE MembersKey MembersKey int unsigned,
 	DROP PRIMARY KEY;
 END IF;
 
@@ -37,7 +37,7 @@ END IF;
 
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'CommonRoom' AND CONSTRAINT_TYPE = 'PRIMARY KEY') > 0 THEN
 	ALTER TABLE CommonRoom
-	CHANGE CommonRoomKey CommonRoomKey INT,
+	CHANGE CommonRoomKey CommonRoomKey int unsigned,
 	DROP PRIMARY KEY;
 END IF;
 
@@ -49,7 +49,7 @@ END IF;
 
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'ListUserStatus' AND CONSTRAINT_TYPE = 'PRIMARY KEY') > 0 THEN
 	ALTER TABLE ListUserStatus
-	CHANGE ListUserStatusKey ListUserStatusKey INT,
+	CHANGE ListUserStatusKey ListUserStatusKey int unsigned,
 	DROP PRIMARY KEY;
 END IF;
 
@@ -67,8 +67,7 @@ isPublic boolean NOT NULL,
 Banner varchar(255) NULL,
 HomeBG varchar(255) NULL,
 Active boolean NOT NULL,
-ModDate timestamp NOT NULL,
-INDEX IDX_CommonRoom_CommonRoomKey (CommonRoomKey)
+ModDate timestamp NOT NULL
 ) ENGINE=InnoDB;
 
 ALTER TABLE CommonRoom ALTER COLUMN Active SET DEFAULT true;
@@ -79,8 +78,7 @@ CREATE TABLE ListUserStatus(
 ListUserStatusKey int unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
 Status varchar(255) NOT NULL,
 Active boolean NOT NULL,
-ModDate timestamp NOT NULL,
-INDEX IDX_ListUserStatus_ListUserStatusKey (ListUserStatusKey)
+ModDate timestamp NOT NULL
 ) ENGINE=InnoDB;
 
 ALTER TABLE ListUserStatus ALTER COLUMN Active SET DEFAULT true;
@@ -88,24 +86,17 @@ ALTER TABLE ListUserStatus ALTER COLUMN Active SET DEFAULT true;
 /********** Create Members Table ************/
 
 CREATE TABLE Members(
+MembersKey int unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
 fScribdenUserKey int unsigned NOT NULL,
 fListUserStatusKey int unsigned NOT NULL,
 fCommonRoomKey int unsigned NOT NULL,
-MembersKey int unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
 Approved boolean NOT NULL,
 isModerator boolean NOT NULL,
 Active boolean NOT NULL,
 ModDate timestamp NOT NULL,
-INDEX IDX_Members_MembersKey (MembersKey),
-INDEX IDX_Members_fScribdenUserKey (fScribdenUserKey),
-INDEX IDX_Members_fListUserStatusKey (fListUserStatusKey),
-INDEX IDX_Members_fCommonRoomKey (fCommonRoomKey),
-CONSTRAINT FK_Members_fScribdenUserKey FOREIGN KEY (fScribdenUserKey) REFERENCES ScribdenUser (ScribdenUserKey)
-	ON DELETE CASCADE,
-CONSTRAINT FK_Members_fListUserStatusKey FOREIGN KEY (fListUserStatusKey) REFERENCES ListUserStatus (ListUserStatusKey)
-	ON DELETE SET NULL,
+CONSTRAINT FK_Members_fScribdenUserKey FOREIGN KEY (fScribdenUserKey) REFERENCES ScribdenUser (ScribdenUserKey),
+CONSTRAINT FK_Members_fListUserStatusKey FOREIGN KEY (fListUserStatusKey) REFERENCES ListUserStatus (ListUserStatusKey),
 CONSTRAINT FK_Members_fCommonRoomKey FOREIGN KEY (fCommonRoomKey) REFERENCES CommonRoom (CommonRoomKey)
-	ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 ALTER TABLE Members ALTER COLUMN Approved SET DEFAULT false;

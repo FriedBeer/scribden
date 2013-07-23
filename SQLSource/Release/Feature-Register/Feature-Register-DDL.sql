@@ -14,7 +14,7 @@ BEGIN
 IF (SELECT COUNT(*) FROM information_schema.table_constraints WHERE TABLE_NAME = 'ScribdenUser' AND CONSTRAINT_TYPE = 'PRIMARY KEY') > 0 THEN
 	/* Drop the AUTO_INCREMENT first, then the primary key */
 	ALTER TABLE ScribdenUser
-	CHANGE ScribdenUserKey ScribdenUserKey INT,
+	CHANGE ScribdenUserKey ScribdenUserKey int unsigned,
 	DROP PRIMARY KEY;
 END IF;
 
@@ -28,8 +28,7 @@ Username varchar(32) NOT NULL,
 Password varchar(32) NOT NULL,
 Email varchar(255) NOT NULL,
 Active boolean NOT NULL,
-ModDate timestamp NOT NULL,
-INDEX IDX_ScribdenUser_ScribdenUserKey (ScribdenUserKey)
+ModDate timestamp NOT NULL
 ) ENGINE=InnoDB;
 
 ALTER TABLE ScribdenUser ALTER COLUMN Active SET DEFAULT true;
