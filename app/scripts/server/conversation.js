@@ -2,7 +2,7 @@
 exports.getCommonRoomConversationsProxy = function (req, res) {
     'use strict';
     
-    var util = require('./sql-util.js'),
+    var util = require('./util.js'),
         promise = exports.getCommonRoomConversations(req.params.commonRoomID);
     util.initPromiseCallback(promise, res);
 };
@@ -18,8 +18,8 @@ exports.getCommonRoomConversations = function (commonRoomID) {
                                         'P.fScribdenUserKey, ' +
                                         'SU.Username ' +                // Add user profile pic later
                                 'FROM	Conversation C ' +
-                                'INNER JOIN Post P' +
-                                    'ON P.fParentConversationKey = C.ConversationKey ' +
+                                'INNER JOIN Post P ' +
+                                    'ON P.fConversationKey = C.ConversationKey ' +
                                 'INNER JOIN ScribdenUser SU ' +
                                     'ON SU.ScribdenUserKey = P.fScribdenUserKey ' +
                                 'WHERE ' +

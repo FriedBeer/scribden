@@ -54,7 +54,7 @@ angular.module('common-room', ['resources.common-room', 'resources.conversation'
   .controller('CommonRoomHomeViewCtrl', [ 'CommonRoom', '$scope', '$cookieStore', function CommonRoomHomeViewCtrl(CommonRoom, $scope, $cookieStore) {
       //$scope.userid = $cookieStore.get('user_id');
   }])
-  .controller('CommonRoomConversationViewCtrl', [ 'CommonRoom', '$scope', '$cookieStore', function CommonRoomConversationViewCtrl(CommonRoom, $scope, $cookieStore) {
+  .controller('CommonRoomConversationViewCtrl', [ 'CommonRoom', '$scope', '$cookieStore', 'conversations', function CommonRoomConversationViewCtrl(CommonRoom, $scope, $cookieStore, conversations) {
       console.log('arrived');
       console.log(conversations);
       $scope.conversations = conversations.result;
