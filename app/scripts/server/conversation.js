@@ -2,7 +2,7 @@
 exports.getCommonRoomConversationsProxy = function (req, res) {
     'use strict';
     
-    var util = require('./util.js'),
+    var util = require('./sql-util.js'),
         promise = exports.getCommonRoomConversations(req.params.commonRoomID);
     util.initPromiseCallback(promise, res);
 };
@@ -10,7 +10,7 @@ exports.getCommonRoomConversationsProxy = function (req, res) {
 exports.getCommonRoomConversations = function (commonRoomID) {
     'use strict';
     
-    var util = require('./util.js');
+    var util = require('./sql-util.js');
     return util.generalQuery('SELECT	C.ConversationKey, ' +
                                         'MIN(P.PostKey) as PostKey, ' + // First post
                                         'C.IsClosed, ' +

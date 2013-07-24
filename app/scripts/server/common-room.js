@@ -75,33 +75,32 @@ exports.updateCommonRoom = function (commonRoomID, name, description, isPublic, 
     'use strict';
     
     var util = require('./sql-util.js'),
-        query = 'UPDATE CommonRoom ',
+        query = 'UPDATE CommonRoom SET ',
         params = [];
     
     if (name) {
-        query += 'SET Name = ?, ';
+        query += 'Name = ?, ';
         params.push(name);
     }
     if (description) {
-        query += 'SET Description = ?, ';
+        query += 'Description = ?, ';
         params.push(description);
     }
     if (isPublic) {
-        query += 'SET IsPublic = ?, ';
+        query += 'isPublic = ?, ';
         params.push(isPublic);
     }
     if (banner) {
-        query += 'SET Banner = ?, ';
+        query += 'Banner = ?, ';
         params.push(banner);
     }
     if (homeBG) {
-        query += 'SET HomeBG = ?, ';
+        query += 'HomeBG = ?, ';
         params.push(homeBG);
     }
     
     if (params.length > 0) {
         query = query.substring(0, query.length - 2);
-        console.log(query);
         query += ' WHERE CommonRoomKey = ? ';
         params.push(commonRoomID);
         
@@ -136,30 +135,20 @@ exports.insertCommonRoom = function (userid, name, description, isPublic, banner
         homeBG = 'null';
     }
     
-    var cPromise = util.generalQuery('INSERT INTO CommonRoom( Name, ' +
-                                                                'Description, ' +
-                                                                'isPublic, ' +
-                                                                'Banner, ' +
-                                                                'HomeBG ) ' +
-                                        'VALUES( ?, ' +
-                                                '?, ' +
-                                                '?, ' +
-                                                '?, ' +
-                                                '? ) ' +
-                                        'SELECT LAST_INSERT_ID() as CommonRoomKey',
+    var cPromise = util.insertQuery('INSERT INTO CommonRoom( Name, Description, isPublic, Banner, HomeBG ) ' +
+                                        'VALUES( ?, ?, ?, ?, ? ); ',
                                         [name, description, isPublic, banner, homeBG]);
     
     cPromise.then(function (value) {
-        console.log('added common room: ' + value);
-        var listUserStatuses = require('./list-user-status.js');
-        console.log(listUserStatuses);
-        var mPromise = members.insertMember(userid, listUserStatuses.ACTIVE, value[0], 1, 1);
+        console.log('added common room: ' + value[0].ResultKey);
+        var listUserStatuses = require('./list-user-status.js'),
+            mPromise = members.insertMember(userid, listUserStatuses.ACTIVE, value[0].ResultKey, 1, 1);
         
         mPromise.then(function (value) {
             console.log('added member');
             deferred.resolve(true);
         }, function (reason) {
-            deferred.reject(new Error(reason)); 
+            deferred.reject(new Error(reason));
         });
     }, function (reason) {
         deferred.reject(new Error(reason));

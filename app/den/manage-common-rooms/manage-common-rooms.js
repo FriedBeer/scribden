@@ -32,7 +32,7 @@ angular.module('den.manage-common-rooms', ['resources.common-room', 'resources.i
                   var userid = $cookieStore.get('user_id');
                   for(var i = 0; i < $scope.commonRooms.length; i++) {
                       // check if isModerator flag is set
-                      if($scope.commonRooms[i].IsModerator) {
+                      if($scope.commonRooms[i].isModerator) {
                           moderatedCommonRooms++;
                       }
                   }
@@ -75,7 +75,7 @@ angular.module('den.manage-common-rooms', ['resources.common-room', 'resources.i
       };
       
       $scope.editCommonRoom = function(data) {
-          if(!data[0]) {
+          if(!data.CommonRoomKey) {
             $rootScope.newCommonRoom = true;
             $rootScope.editingCommonRoom = undefined;
           }

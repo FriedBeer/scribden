@@ -28,6 +28,36 @@ exports.generalQuery = function(sqlStatement, params) {
     return deferred.promise;
 }
 
+exports.insertQuery = function(sqlStatement, params) {
+    var Q = require('q');
+    var dbConnect = require('./sql-util.js');
+    var deferred = Q.defer();
+    var result = new Array();
+    var connPromise = dbConnect.getSQLConnection(); // connect to the db
+    
+    connPromise.then(function(conn) {
+        // execute insert query
+        conn.query(sqlStatement, params, function(err, results) {
+            if(err) {
+                console.log(err);
+                conn.end();
+                deferred.reject(new Error(err));
+            }
+            // get inserted key
+            conn.query('SELECT LAST_INSERT_ID() AS ResultKey', undefined, function(err, results) {
+                if(err) {
+                    console.log(err);
+                    conn.end();
+                    deferred.reject(new Error(err));
+                }
+                
+                deferred.resolve(results);
+            });
+        });
+    });
+    
+    return deferred.promise;
+}
 
 // var sql declared in scripts/server.js
 exports.getSQLConnection = function() {
