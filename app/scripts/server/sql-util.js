@@ -15,9 +15,10 @@ exports.generalQuery = function(sqlStatement, params) {
     
     connPromise.then(function(conn) {
         conn.query(sqlStatement, params, function(err, results) {
+            conn.end();
+            
             if(err) {
                 console.log(err);
-                conn.end();
                 deferred.reject(new Error(err));
             }
             
@@ -40,14 +41,14 @@ exports.insertQuery = function(sqlStatement, params) {
         conn.query(sqlStatement, params, function(err, results) {
             if(err) {
                 console.log(err);
-                conn.end();
                 deferred.reject(new Error(err));
             }
             // get inserted key
             conn.query('SELECT LAST_INSERT_ID() AS ResultKey', undefined, function(err, results) {
+                conn.end();
+                
                 if(err) {
                     console.log(err);
-                    conn.end();
                     deferred.reject(new Error(err));
                 }
                 

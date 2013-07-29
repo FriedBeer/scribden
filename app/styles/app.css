@@ -6607,7 +6607,40 @@ a.label:hover, a.badge:hover {
   margin: 0 auto;
 }
 
+.right {
+  float: right;   
+}
+
 /* line 12, ../../app/styles/app.scss */
 .clear {
   clear: both;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 20px;
+}
+
+.scribden {
+    font-family: georgia,garamond,serif;
+}
+
+.scribden a {
+    font-size: 14px;   
+}
+
+.scribden .header-link {
+    line-height: 50px;
+}
+
+.scribden .align-right {
+    text-align: right;   
+}
+
+.scribden .image {
+    -moz-border-top-right-radius: 20px;
+    -moz-border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
