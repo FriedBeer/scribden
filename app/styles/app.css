@@ -6644,3 +6644,7 @@ h3 {
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
 }
+
+.container {
+    width: 1020px;
+}

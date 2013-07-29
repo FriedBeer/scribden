@@ -251,10 +251,10 @@ angular.module('den.manage-common-rooms', ['resources.common-room', 'resources.i
       }
   }])
   .constant('BANNER_REQS', {
-        width: 250,
-        height: 90
+        width: 730,
+        height: 60
   })
   .constant('HOMEBG_REQS', {
-        width: 600,
-        height: 600
+        width: 900,
+        height: 675
   });
