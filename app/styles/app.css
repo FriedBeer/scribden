@@ -6641,10 +6641,10 @@ h3 {
 }
 
 .scribden .image {
-    -moz-border-top-right-radius: 20px;
-    -moz-border-bottom-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+    -moz-border-top-right-radius: 10px;
+    -moz-border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .scribden .container {
@@ -6707,12 +6707,66 @@ h3 {
     display: inline-block;
 }
 
+.scribden .header-link a {
+    background-color: transparent;
+}
+
+.scribden .header-link a:hover {
+    background-color: transparent;
+}
+
 .scribden .header-link a:hover {
     color: #ffffff;
 }
 
+.scribden .header-link .nav-pills .active a {
+    color: #ffffff;   
+}
+
 .scribden .shadow {
-    -moz-box-shadow: 2px 2px 4px #000000;
-    -webkit-box-shadow: 2px 2px 4px #000000;
-    box-shadow: 2px 2px 4px #000000;
+    -moz-box-shadow: 1px 4px 4px #000000;
+    -webkit-box-shadow: 1px 4px 4px #000000;
+    box-shadow: 1px 4px 4px #000000;
+}
+
+.scribden .den .in-page .nav {
+    height: 30px;    
+}
+
+.scribden .den .in-page .nav-pills a {
+    color: #171124;
+    background-color: transparent;
+}
+
+.scribden .den .in-page .nav-pills a:hover {
+    background-color: transparent;
+    border-bottom: 2px solid;
+    border-bottom-style: dashed;
+    border-bottom-color: #d8eecf;   
+}
+
+.scribden .den .in-page .nav-pills .active a {
+    color: #979983;
+    background-color: transparent;
+}
+
+.scribden .den .footer .footer-links {
+    width: 765px;
+}
+
+.scribden .den .footer .footer-links li {
+    padding: 0px 10px 0px 0px;
+}
+
+.scribden .den .in-page .default-common-room-bg {
+    display: inline-block;
+    width: 730px;
+    height: 60px;
+    background-color: #d8eecf;
+}
+
+.scribden .den .in-page .default-common-room-bg .banner-text {
+    font-size: 25px;
+    color: #87c36f;
+    padding: 23px 20px 0px 0px;
 }
