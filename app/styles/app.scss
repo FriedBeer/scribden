@@ -1,5 +1,7 @@
 @import "compass_twitter_bootstrap";
 
+/** CUSTOM CSS **/
+
 .left {
     float: left;
     }
@@ -25,27 +27,96 @@ h3 {
 
 .scribden {
     font-family: georgia,garamond,serif;
-}
-
-.scribden a {
-    font-size: 14px;   
-}
-
-.scribden .header-link {
-    line-height: 50px;
-}
-
-.scribden .align-right {
-    text-align: right;   
-}
-
-.scribden .image {
-    -moz-border-top-right-radius: 20px;
-    -moz-border-bottom-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-}
-
-.container {
-    width: 1020px;
+    background-color: #705139;
+    
+    a {
+        font-size: 14px;   
+    }
+    
+    .header-link {
+        line-height: 50px;
+    }
+    
+    .footer ul, .footer a {
+        color: #979983;
+        font-size: 12px;
+    }
+    
+    .footer li {
+        display: inline-block;
+    }
+    
+    .align-right {
+        text-align: right;   
+    }
+    
+    .image {
+        -moz-border-top-right-radius: 20px;
+        -moz-border-bottom-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+    
+    .container {
+        width: 1020px;
+    }
+    
+    .hero-unit {
+        background-color: #705139;
+    }
+    
+    .header-link a, .header-link span {
+        color: #d8eecf;    
+    }
+    
+    .header-link a:hover {
+        color: #ffffff;
+    }
+    
+    .shadow {
+        -moz-box-shadow: 2px 2px 4px #000000;
+        -webkit-box-shadow: 2px 2px 4px #000000;
+        box-shadow: 2px 2px 4px #000000;
+    }
+    
+    .den {
+        h2 {
+            color: #979983;
+        }
+            
+        h3 {
+            color: #171124;
+        }
+    
+        .bg-pages {
+            background-color: #f4f4f4;
+            background-image: url('/styles/images/BGPages_MiddleBit.png');
+            background-repeat: repeat-y;
+            border-radius: 5px;
+            min-height: 630px;
+            position: relative;
+            
+            .in-page {
+                padding: 10px 10px 10px 25px;    
+            }
+        
+            .top-bit {
+                display: block;
+                width: 30px;
+                height: 10px;
+                position: absolute;
+                top: 0px;
+                background-image: url('/styles/images/BGPages_TopBit.png');
+            }
+            
+            .bottom-bit {
+                display: block;
+                width: 30px;
+                height: 10px;
+                position: absolute;
+                bottom: 0px;
+                background-image: url('/styles/images/BGPages_BottomBit.png');   
+            }
+        }
+    }
 }

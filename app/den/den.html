@@ -1,33 +1,53 @@
-<div class="center hero-unit scribden den" ng-controller="DenCtrl">
+<div class="center hero-unit den" ng-controller="DenCtrl">
     <div class="header">
         <div class="left">
             <h2>{{ username }}'s Den</h2>
         </div>
         <div class="header-link right">
-            <a href="#/den">Profile</a> | <a href="#/logout">Logout</a>
+            <a href="#/den">Profile</a><span> | </span><a href="#/logout">Logout</a>
         </div>
         <div class="clear"></div>
     </div>
     <div class="body">
-        <div class="left align-right">
-            <ul class="nav nav-pills nav-stacked">
-                <li><a href="#/den/messages">Messages</a></li>
-                <li class="active"><a href="#/den">Common Rooms</a></li>
-                <li><a href="#/den/fellows">Fellow Scribs</a></li>
-                <li><a href="#/den/bookmarks">Bookmarks</a></li>
-                <li><a href="#/den/settings">Settings</a></li>
-            </ul>
-        </div>
-        <div class="right align-right">
-            <ul class="nav nav-pills">
-                <li class="active"><a href="#/den">My Den</a></li>
-                <li><a href="#/den/manage-common-rooms">Manage Common Rooms</a></li>
-            </ul>
-            <br>
-            <li ng-hide="commonRooms.length">No common rooms</li>
-            <div ng-repeat="commonRoom in commonRooms">
-                <a id="commonRoomLink" ng-href="#/common-room/{{ commonRoom.CommonRoomKey }}" class="btn-link"><img ng-src="{{ commonRoom.Banner }}" class="image" /></a>
+            <div class="header-link left align-right">
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="#/den/messages">Messages</a></li>
+                    <li class="active"><a href="#/den">Common Rooms</a></li>
+                    <li><a href="#/den/fellows">Fellow Scribs</a></li>
+                    <li><a href="#/den/bookmarks">Bookmarks</a></li>
+                    <li><a href="#/den/settings">Settings</a></li>
+                </ul>
             </div>
+            <div class="right align-right bg-pages shadow">
+                <div class="top-bit"></div>
+                <div class="in-page">
+                    <ul class="nav nav-pills right">
+                        <li class="active"><a href="#/den">My Den</a></li>
+                        <li><a href="#/den/manage-common-rooms">Manage Common Rooms</a></li>
+                    </ul>
+                    <div ng-hide="commonRooms.length">No common rooms</div>
+                    <div ng-repeat="commonRoom in commonRooms">
+                        <a id="commonRoomLink" ng-href="#/common-room/{{ commonRoom.CommonRoomKey }}" class="btn-link">
+                            <img ng-src="{{ commonRoom.Banner }}" class="image" ng-show="commonRoom.Banner.length" />
+                        </a>
+                    </div>
+                </div>
+                <div class="bottom-bit"></div>
+            </div>
+            <div class="clear"></div>
+    </div>
+    <div class="footer">
+        <div class="left">
+            <h3>ScribDen</h3>
+        </div>
+        <div class="right">
+            <ul>
+                <li>© ScribDen, Inc.</li>
+                <li><a href="#/help">Help</a></li>
+                <li><a href="#/about">About</a></li>
+                <li><a href="#/legal">Legal</a></li>
+                <li><a href="#/privacy">Privacy</a></li>
+            </ul>
         </div>
         <div class="clear"></div>
     </div>

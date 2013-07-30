@@ -6596,6 +6596,7 @@ a.label:hover, a.badge:hover {
   position: fixed;
 }
 
+/** CUSTOM CSS **/
 /* line 3, ../../app/styles/app.scss */
 .left {
   float: left;
@@ -6624,6 +6625,7 @@ h3 {
 
 .scribden {
     font-family: georgia,garamond,serif;
+    background-color: #705139;
 }
 
 .scribden a {
@@ -6645,6 +6647,72 @@ h3 {
     border-bottom-left-radius: 20px;
 }
 
-.container {
+.scribden .container {
     width: 1020px;
+}
+
+.scribden .hero-unit {
+    background-color: #705139;
+}
+
+.scribden .den h2 {
+    color: #979983;
+}
+
+.scribden h3 {
+    color: #171124;
+}
+
+.scribden .den .bg-pages {
+    background-color: #f4f4f4;
+    background-image: url('/styles/images/BGPages_MiddleBit.png');
+    background-repeat: repeat-y;
+    border-radius: 5px;
+    min-height: 630px;
+    position: relative;
+}
+
+.scribden .den .in-page {
+    padding: 10px 10px 10px 25px;    
+}
+
+.scribden .den .bg-pages .top-bit {
+    display: block;
+    width: 30px;
+    height: 10px;
+    position: absolute;
+    top: 0px;
+    background-image: url('/styles/images/BGPages_TopBit.png');
+}
+
+.scribden .den .bg-pages .bottom-bit {
+    display: block;
+    width: 30px;
+    height: 10px;
+    position: absolute;
+    bottom: 0px;
+    background-image: url('/styles/images/BGPages_BottomBit.png');   
+}
+
+.scribden .header-link a, .scribden .header-link span {
+    color: #d8eecf;
+}
+
+.scribden .footer ul, .scribden .footer a {
+    color: #979983;
+    font-size: 12px;
+}
+
+.scribden .footer li {
+    display: inline-block;
+}
+
+.scribden .header-link a:hover {
+    color: #ffffff;
+}
+
+.scribden .shadow {
+    -moz-box-shadow: 2px 2px 4px #000000;
+    -webkit-box-shadow: 2px 2px 4px #000000;
+    box-shadow: 2px 2px 4px #000000;
 }
