@@ -31,3 +31,20 @@ exports.getCommonRoomConversations = function (commonRoomID) {
                                 'ORDER BY C.ModDate DESC',
                                 [commonRoomID]);
 };
+
+exports.insertConversationProxy = function (req, res) {
+    'use strict';
+    
+    var util = require('./util.js'),
+        promise = exports.insertConversation(req.body.commonRoomID, req.body.isBranch, req.body.isClosed);
+    util.initPromiseCallback(promise, res);
+};
+
+exports.insertConversation = function (commonRoomID, isBranch, isClosed) {
+    'use strict';
+    
+    var util = require('./sql-util.js');
+    return util.generalQuery('INSERT INTO Conversation (fCommonRoomKey, IsBranch, IsClosed) ' +
+                             'VALUES (?, ?, ?)',
+                                [commonRoomID, isBranch, isClosed]);
+};

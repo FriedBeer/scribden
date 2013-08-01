@@ -23,6 +23,8 @@ apiUser = require('./scripts/server/user.js');
 apiCommonRoom = require('./scripts/server/common-room.js');
 // handles conversation data
 apiConversation = require('./scripts/server/conversation.js');
+// handles post data
+apiPost = require('./scripts/server/post.js');
 // handles various utility functions
 apiUtil = require('./scripts/server/util.js');
 
@@ -56,6 +58,10 @@ app.post(API_PATH + 'common-room', apiCommonRoom.insertCommonRoomProxy);
 
 // conversation
 app.get(API_PATH + 'conversation/common-room/:commonRoomID', apiConversation.getCommonRoomConversationsProxy);
+app.post(API_PATH + 'conversation', apiConversation.insertConversationProxy);
+
+// post
+app.post(API_PATH + 'post', apiPost.insertPostProxy);
 
 // utilities
 app.get(API_PATH + 'signS3put/:s3objecttype/:s3objectname', apiUtil.uploadFile);

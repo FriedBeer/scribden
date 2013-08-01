@@ -7,55 +7,48 @@ angular.module('common-room', ['resources.common-room', 'resources.conversation'
     $routeProvider
       .when('/common-room/:commonRoomID', {
         templateUrl: 'common-room/common-room.html',
-        controller: 'CommonRoomCtrl',
+        controller: 'CommonRoomCtrl',/*
         resolve: {
-            commonRoomData: ['CommonRoom', '$route', '$cookieStore', function(CommonRoom, $route, $cookieStore) {
-                return CommonRoom.query({
-                    path: $route.current.params.commonRoomID + '/' + $cookieStore.get('user_id')
-                });
-            }]
-            /*
             security: ['security', '$route', function(security, route){
                 // check that the user is allowed to access this common room
                 // Must be approved and not under disciplinary action
                 return security.verifyCommonRoomAccess($route.current.params.commonRoomID);
             }]
-            */
-        }
+            
+        }*/
       })
       .when('/common-room/:commonRoomID/conversation', {
         templateUrl: 'common-room/view-conversations.html',
-        controller: 'CommonRoomCtrl',
+        controller: 'CommonRoomConversationViewCtrl',/*
         resolve: {
-            commonRoomData: ['CommonRoom', '$route', '$cookieStore', function(CommonRoom, $route, $cookieStore) {
-                return CommonRoom.query({
-                    path: $route.current.params.commonRoomID + '/' + $cookieStore.get('user_id')
-                });
-            }],
-            conversations: ['Conversation', '$route', function(Conversation, $route) {
-                return Conversation.query({
-                    path: 'common-room/' + $route.current.params.commonRoomID
-                });
-            }]
-            /*
             security: ['security', '$route', function(security, route){
                 // check that the user is allowed to access this common room
                 // Must be approved and not under disciplinary action
                 return security.verifyCommonRoomAccess($route.current.params.commonRoomID);
             }]
-            */
-        }
+            
+        }*/
       })
   }])
-  .controller('CommonRoomCtrl', [ 'CommonRoom', 'commonRoomData', '$scope', '$cookieStore', function CommonRoomCtrl(CommonRoom, commonRoomData, $scope, $cookieStore) {
-      $scope.commonRoom = commonRoomData.result[0];
+  .controller('CommonRoomCtrl', [ 'CommonRoom', '$scope', '$route', '$cookieStore', function CommonRoomCtrl(CommonRoom, $scope, $route, $cookieStore) {
       $scope.userid = $cookieStore.get('user_id');
+      
+      CommonRoom.query({
+          path: $route.current.params.commonRoomID + '/' + $cookieStore.get('user_id')
+      }).then(function(data) {
+          $scope.commonRoom = data.result[0];
+      });
   }])
   .controller('CommonRoomHomeViewCtrl', [ 'CommonRoom', '$scope', '$cookieStore', function CommonRoomHomeViewCtrl(CommonRoom, $scope, $cookieStore) {
       //$scope.userid = $cookieStore.get('user_id');
   }])
-  .controller('CommonRoomConversationViewCtrl', [ 'CommonRoom', '$scope', '$cookieStore', 'conversations', function CommonRoomConversationViewCtrl(CommonRoom, $scope, $cookieStore, conversations) {
-      console.log('arrived');
-      console.log(conversations);
-      $scope.conversations = conversations.result;
+  .controller('CommonRoomConversationViewCtrl', [ 'Conversation', 'CommonRoom', '$scope', '$route', function CommonRoomConversationViewCtrl(Conversation, CommonRoom, $scope, $route) {
+      //console.log(conversations);
+      $scope.commonRoomID = $route.current.params.commonRoomID;
+      Conversation.query({
+                    path: 'common-room/' + $route.current.params.commonRoomID
+                }).then(function(data) {
+                    console.log(data);
+                    $scope.conversations = data.result[0];
+                });
   }]);
