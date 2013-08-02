@@ -21,16 +21,19 @@
             <div class="right align-right bg-pages shadow">
                 <div class="top-bit"></div>
                 <div class="in-page">
+                    <img src="/styles/images/Ribbon_140x25.png" class="ribbon" />
                     <ul class="nav nav-pills right">
                         <li class="active"><a href="#/den">My Den</a></li>
                         <li><a href="#/den/manage-common-rooms">Manage Common Rooms</a></li>
                     </ul>
                     <div ng-hide="commonRooms.length">No common rooms</div>
                     <div ng-repeat="commonRoom in commonRooms">
-                        <a id="commonRoomLink" ng-href="#/common-room/{{ commonRoom.CommonRoomKey }}" class="btn-link">
-                            <img ng-src="{{ commonRoom.Banner }}" class="image" ng-show="commonRoom.Banner" />
-                            <div class="default-common-room-bg image" ng-hide="commonRoom.Banner"><div class="banner-text"><strong>{{ commonRoom.Name }}</strong></div></div>
-                        </a>
+                        <div class="bottom-spacing">
+                            <a id="commonRoomLink" ng-href="#/common-room/{{ commonRoom.CommonRoomKey }}" class="btn-link">
+                                <img ng-src="{{ commonRoom.Banner }}" class="default-common-room-bg image" ng-show="commonRoom.Banner" />
+                                <div class="default-common-room-bg image" ng-hide="commonRoom.Banner"><div class="banner-text"><strong>{{ commonRoom.Name }}</strong></div></div>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="bottom-bit"></div>
