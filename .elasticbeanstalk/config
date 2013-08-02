@@ -1,5 +1,5 @@
 [global]
-ApplicationName=My First Elastic Beanstalk Application
+ApplicationName=Scribden
 DevToolsEndpoint=git.elasticbeanstalk.us-east-1.amazonaws.com
-EnvironmentName=Default-Environment
+EnvironmentName=ScribdenDev
 Region=us-east-1
