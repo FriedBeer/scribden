@@ -1,6 +1,6 @@
 exports.insertMember = function(userid, listUserStatusID, commonRoomID, approved, isModerator) {
     var util = require('./sql-util.js');
-    return util.generalQuery('INSERT INTO Members( fScribdenUserKey, ' +
+    return util.insertQuery('INSERT INTO Members( fScribdenUserKey, ' +
                                                      'fListUserStatusKey, ' +
                                                      'fCommonRoomKey, ' +
                                                      'Approved, ' +

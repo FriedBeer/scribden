@@ -1,6 +1,6 @@
 <div ng-controller="ConversationAddCtrl">
     <form name="addPostForm" ng-submit="submit()">
-        <textarea ui-tinymce ng-model="tinymceModel" name="content"></textarea>
+        <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" name="content"></textarea>
         <input type="submit" class="btn" name="submitBtn" value="Submit" />
     </form>
 </div>

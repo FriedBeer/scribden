@@ -44,7 +44,7 @@ exports.insertConversation = function (commonRoomID, isBranch, isClosed) {
     'use strict';
     
     var util = require('./sql-util.js');
-    return util.generalQuery('INSERT INTO Conversation (fCommonRoomKey, IsBranch, IsClosed) ' +
+    return util.insertQuery('INSERT INTO Conversation (fCommonRoomKey, IsBranch, IsClosed) ' +
                              'VALUES (?, ?, ?)',
                                 [commonRoomID, isBranch, isClosed]);
 };

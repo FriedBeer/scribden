@@ -1,5 +1,5 @@
 'use_strict';
-
+// @TODO: Change exports.fn = function() to be var fn = function(); exports.fn = fn; so that a require statement is not necessary to call functions within the same file
 var express = require('express'),
     app = module.exports.app = express(),
     sqlConfig = {

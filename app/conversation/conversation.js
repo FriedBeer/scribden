@@ -18,18 +18,45 @@ angular.module('conversation', ['resources.conversation', 'resources.post', 'ui.
   .controller('ConversationViewCtrl', [ 'Conversation', '$scope', '$cookieStore', function ConversationViewCtrl(Conversation, $scope, $cookieStore) {
       
   }])
-  .controller('ConversationAddCtrl', [ 'Post', '$scope', '$route', '$http', '$cookieStore', '$location', function ConversationAddCtrl(Post, $scope, $route, $http, $cookieStore, $location) {
+  .controller('ConversationAddCtrl', [ 'Conversation', 'Post', '$scope', '$route', '$http', '$cookieStore', '$location', function ConversationAddCtrl(Conversation, Post, $scope, $route, $http, $cookieStore, $location) {
       $scope.tinymceModel = tinymce;
-      $scope.form = { userid: $cookieStore.get('userid'),
-                      commonRoomID: $route.current.params.commonRoomID
-      };
+      $scope.tinymceOptions = {
+					selector: "textarea",
+					plugins: [
+						"advlist autolink lists link image charmap print preview anchor",
+						"searchreplace visualblocks code fullscreen",
+						"insertdatetime media table contextmenu paste"
+					],
+					toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+					autosave_ask_before_unload: false,
+					max_height: 800,
+					min_height: 300,
+					height : 300
+				};
+      
+      $scope.form = { userid: $cookieStore.get('user_id') };
       
       $scope.submit = function() {
           $scope.form.content = $scope.tinymceModel;
-          Post.insert({
-              data: $scope.form,
+          $scope.conversationForm = { commonRoomID: $route.current.params.commonRoomID,
+                                      isBranch: false,
+                                      isClosed: false
+          };
+          Conversation.insert({
+              data: $scope.conversationForm,
               successCallback: function(data) {
-                  $location.path('/conversation/common-room/' + $route.current.params.commonRoomID);
+                  console.log('conversation inserted');
+                  console.log(data);
+                  $scope.form.conversationID = data.result[0].ResultKey;
+                  console.log($scope.form);
+                  Post.insert({
+                      data: $scope.form,
+                      successCallback: function(data) {
+                          console.log('post inserted');
+                          console.log(data);
+                          $location.path('/common-room/' + $route.current.params.commonRoomID + '/conversation');
+                      }
+                  });
               }
           });
       };
