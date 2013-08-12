@@ -6791,3 +6791,38 @@ h3 {
     left: -135px;
     top: 37px;
 }
+
+.scribden .cr-conversations table {
+    width: 100%;
+    background-color: #f4f4f4;
+    border-top: #979983 2px dashed;
+    border-right: #979983 2px solid;
+    border-bottom: #979983 2px dashed;
+    border-left: #979983 2px solid;
+}
+
+.scribden .cr-conversations .left-column {
+    width: 15%;
+    vertical-align: top;
+    padding-top: 20px;
+    border-right: #979983 2px dashed;
+}
+
+.scribden .cr-conversations .right-column {
+    width: 85%;
+    padding: 20px 20px 0px 20px;
+}
+
+.scribden .cr-conversations #content {
+    text-align: left;
+}
+
+.scribden .cr-conversations .footer {
+    font-size: 12px;
+    color: #979983;
+}
+
+.scribden .cr-conversations .footer :hover {
+    font-size: 12px;
+    color: #171124;
+}

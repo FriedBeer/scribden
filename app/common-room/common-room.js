@@ -2,7 +2,8 @@
 // If using a resolve block, the controller that contains a resolve block cannot be an ng-controller in the html.
 // A child controller must be created, and that will get the resolved variables. This controller is what should
 // be used as the ng-controller
-angular.module('common-room', ['resources.common-room', 'resources.conversation', 'ngCookies'])
+// require ngSanitize when using ng-bind-html, they go hand-in-hand
+angular.module('common-room', ['resources.common-room', 'resources.conversation', 'ngCookies', 'ngSanitize'])
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/common-room/:commonRoomID', {
@@ -49,6 +50,6 @@ angular.module('common-room', ['resources.common-room', 'resources.conversation'
                     path: 'common-room/' + $route.current.params.commonRoomID
                 }).then(function(data) {
                     console.log(data);
-                    $scope.conversations = data.result[0];
+                    $scope.conversations = data.result;
                 });
   }]);
