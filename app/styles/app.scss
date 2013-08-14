@@ -29,10 +29,6 @@ h3 {
     font-family: georgia,garamond,serif;
     background-color: #705139;
     
-    a {
-        font-size: 14px;   
-    }
-    
     .header-link {
         line-height: 50px;
         
@@ -93,6 +89,10 @@ h3 {
     }
     
     .den {
+        a {
+            font-size: 14px;   
+        }
+        
         h2 {
             color: #979983;
         }

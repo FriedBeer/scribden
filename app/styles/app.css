@@ -6628,7 +6628,7 @@ h3 {
     background-color: #705139;
 }
 
-.scribden a {
+.scribden .den a {
     font-size: 14px;   
 }
 
@@ -6653,6 +6653,10 @@ h3 {
 
 .scribden .hero-unit {
     background-color: #705139;
+}
+
+.scribden .hero-unit h1 {
+    font-size: 38.5px;
 }
 
 .scribden .den h2 {
@@ -6792,21 +6796,35 @@ h3 {
     top: 37px;
 }
 
-.scribden .cr-conversations #user {
+.scribden .cr-conversations .user {
     width: 70px;
     height: 50px;
     background-image: url('/styles/images/Ribbon_70x50.png');
     display: block;
 }
 
-.scribden .cr-conversations #post {
+.scribden .cr-conversations .post {
     width: 830px;
 }
 
 .scribden .cr-conversations table {
     width: 100%;
     background-color: #f4f4f4;
-    border: #979983 2px solid;
+    border-left: #979983 2px solid;
+    border-right: #979983 2px solid;
+    border-bottom: #979983 2px dashed;
+}
+
+.scribden .cr-conversations .solid-border {
+    background-color: #979983;
+    display: block;
+    width: 830px;
+    height: 2px;
+}
+
+/* overlap bottom of last dashed border with a solid one */
+.scribden .cr-conversations .border-bottom {
+    margin-top: -2px;
 }
 
 .scribden .cr-conversations .content {
@@ -6814,13 +6832,23 @@ h3 {
     padding: 20px 20px 0px 20px;
 }
 
+.scribden .cr-conversations .content a {
+    color: #61656F;
+}
+
+.scribden .cr-conversations .content a:hover {
+    color: #171124;
+}
+
 .scribden .cr-conversations .footer {
     font-size: 12px;
     color: #979983;
     border-bottom: #979983 2px dashed;
+    padding: 0px 10px 0px 10px;
 }
 
 .scribden .cr-conversations .footer :hover {
     font-size: 12px;
     color: #171124;
+    cursor: default;
 }
