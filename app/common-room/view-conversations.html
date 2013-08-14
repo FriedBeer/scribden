@@ -1,20 +1,24 @@
 <div class="center hero-unit cr-conversations" ng-controller="CommonRoomConversationViewCtrl">
-    <table id="CRConversations">
-        <thead></thead>
-        <tbody ng-repeat="post in conversations">
-            <tr>
-                <td class="left-column">{{ post.Username }}</td>
-                <td id="content" class="right-column" ng-bind-html="post.Content"></td>
-            </tr>
-            <tr>
-                <td class="left-column"><!-- empty space --></td>
-                <td class="right-column footer">
-                    <div class="left">01/13/13 1:35PM</div><!-- date posted -->
-                    <div class="right">1</div><!-- post number in conversation -->
-                    <div class="clear"></div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div ng-repeat="post in conversations">
+        <div id="user" class="small-ribbon left">
+            {{ post.Username }}
+        </div>
+        <div id="post" class="right">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="content" ng-bind-html="post.Content"></td>
+                    </tr>
+                    <tr class="footer">
+                        <td>
+                            <div class="left">01/13/13 1:35PM</div><!-- date posted -->
+                            <div class="right">1</div><!-- post number in conversation -->
+                            <div class="clear"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <a href="#/conversation/common-room/{{ commonRoomID }}" id="addNewConversation" class="btn">Start a new conversation</a>
 </div>

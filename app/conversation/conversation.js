@@ -19,6 +19,7 @@ angular.module('conversation', ['resources.conversation', 'resources.post', 'ui.
       
   }])
   .controller('ConversationAddCtrl', [ 'Conversation', 'Post', '$scope', '$route', '$http', '$cookieStore', '$location', function ConversationAddCtrl(Conversation, Post, $scope, $route, $http, $cookieStore, $location) {
+      // @TODO: Check submission content for HTML and do clean up on it
       $scope.tinymceModel = tinymce;
       $scope.tinymceOptions = {
 					selector: "textarea",

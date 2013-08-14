@@ -6792,34 +6792,32 @@ h3 {
     top: 37px;
 }
 
+.scribden .cr-conversations #user {
+    width: 70px;
+    height: 50px;
+    background-image: url('/styles/images/Ribbon_70x50.png');
+    display: block;
+}
+
+.scribden .cr-conversations #post {
+    width: 830px;
+}
+
 .scribden .cr-conversations table {
     width: 100%;
     background-color: #f4f4f4;
-    border-top: #979983 2px dashed;
-    border-right: #979983 2px solid;
-    border-bottom: #979983 2px dashed;
-    border-left: #979983 2px solid;
+    border: #979983 2px solid;
 }
 
-.scribden .cr-conversations .left-column {
-    width: 15%;
-    vertical-align: top;
-    padding-top: 20px;
-    border-right: #979983 2px dashed;
-}
-
-.scribden .cr-conversations .right-column {
-    width: 85%;
-    padding: 20px 20px 0px 20px;
-}
-
-.scribden .cr-conversations #content {
+.scribden .cr-conversations .content {
     text-align: left;
+    padding: 20px 20px 0px 20px;
 }
 
 .scribden .cr-conversations .footer {
     font-size: 12px;
     color: #979983;
+    border-bottom: #979983 2px dashed;
 }
 
 .scribden .cr-conversations .footer :hover {

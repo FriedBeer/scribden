@@ -111,7 +111,7 @@ ALTER TABLE Conversation ALTER COLUMN Active SET DEFAULT true;
 
 CREATE TABLE Post(
 PostKey int unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
-Content varchar(700) NOT NULL,
+Content varchar(1200) NOT NULL,
 fScribdenUserKey int unsigned NOT NULL,
 fConversationKey int unsigned NOT NULL,
 Active boolean NOT NULL,
