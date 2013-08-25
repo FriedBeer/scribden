@@ -1,0 +1,17 @@
+<div class="center hero-unit" ng-controller="ManageCommonRoomsCtrl">
+    <tabset>
+        <tab heading="Moderated" >
+            <div ng-repeat="commonRoom in commonRooms">
+                <button id="createNewBtn" ng-hide="commonRoom.CommonRoomKey" data-toggle="modal" ng-click="editCommonRoom(commonRoom)" class="btn">Create New Common Room</button>
+                <button id="updateBtn" ng-show="commonRoom.CommonRoomKey && commonRoom.isModerator" data-toggle="modal" ng-click="editCommonRoom(commonRoom)" class="btn">{{ commonRoom.Name }}</button>
+            </div>
+        </tab>
+        <tab heading="Participating" active="isModerator">
+            <div ng-repeat="commonRoom in commonRooms">
+                <div ng-show="commonRoom.CommonRoomKey && !commonRoom.isModerator">
+                    <span>{{ commonRoom.Name }}</span>
+                </div>
+            </div>
+        </tab>
+    </tabset>
+</div>

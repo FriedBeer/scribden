@@ -1,0 +1,196 @@
+@import "compass_twitter_bootstrap";
+
+/** CUSTOM CSS **/
+
+.left {
+    float: left;
+    }
+
+.center {
+    text-align: center;
+    margin: 0 auto;
+    }
+
+.right {
+    float: right;   
+    }
+
+.clear {
+    clear: both;
+    }
+
+h1,
+h2,
+h3 {
+  line-height: 20px;
+}
+
+.scribden {
+    font-family: georgia,garamond,serif;
+    background-color: #705139;
+    
+    .header-link {
+        line-height: 50px;
+        
+        a {
+            background-color: transparent;
+        }
+        
+        a:hover {
+            background-color: transparent;
+        }
+    }
+    
+    .footer ul, .footer a {
+        color: #979983;
+        font-size: 12px;
+    }
+    
+    .footer li {
+        display: inline-block;
+    }
+    
+    .align-right {
+        text-align: right;   
+    }
+    
+    .image {
+        -moz-border-top-right-radius: 10px;
+        -moz-border-bottom-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+    
+    .container {
+        width: 1020px;
+    }
+    
+    .hero-unit {
+        background-color: #705139;
+    }
+    
+    .header-link a, .header-link span {
+        color: #d8eecf;
+        background-color: transparent;
+    }
+    
+    .header-link a:hover {
+        color: #ffffff;
+    }
+        
+    .header-link .nav-pills .active a {
+        color: #ffffff;        
+    }
+    
+    .shadow {
+        -moz-box-shadow: 1px 4px 4px #000000;
+        -webkit-box-shadow: 1px 4px 4px #000000;
+        box-shadow: 1px 4px 4px #000000;
+    }
+    
+    .den {
+        a {
+            font-size: 14px;   
+        }
+        
+        h2 {
+            color: #979983;
+        }
+            
+        h3 {
+            color: #171124;
+        }
+    
+        .bg-pages {
+            background-color: #f4f4f4;
+            background-image: url('/styles/images/BGPages_MiddleBit.png');
+            background-repeat: repeat-y;
+            border-radius: 5px;
+            min-height: 630px;
+            position: relative;
+            
+            .in-page {
+                padding: 10px 10px 10px 25px;    
+            }
+        
+            .top-bit {
+                display: block;
+                width: 30px;
+                height: 10px;
+                position: absolute;
+                top: 0px;
+                background-image: url('/styles/images/BGPages_TopBit.png');
+            }
+            
+            .bottom-bit {
+                display: block;
+                width: 30px;
+                height: 10px;
+                position: absolute;
+                bottom: 0px;
+                background-image: url('/styles/images/BGPages_BottomBit.png');   
+            }
+        }
+        
+        .in-page {
+            .nav {
+                height: 30px;
+            }
+            
+            .nav-pills {
+                a {
+                    color: #171124;
+                    background-color: transparent;
+                }
+            
+                a:hover {
+                    background-color: transparent;
+                    border-bottom: 2px solid;
+                    border-bottom-style: dashed;
+                    border-bottom-color: #d8eecf;   
+                }
+            
+                .active a {
+                    color: #979983;
+                    background-color: transparent;
+                }
+            }
+            
+            .btn-link {
+                padding: 0px 0px 10px 0px;
+            }
+            
+            .default-common-room-bg {
+                display: inline-block;
+                width: 730px;
+                height: 60px;
+                background-color: #d8eecf;
+            }
+            
+            .default-common-room-bg .banner-text {
+                font-size: 25px;
+                color: #87c36f;
+                padding: 23px 20px 0px 0px;
+            }
+        }
+        
+        .footer {
+            ul, a {
+                color: #979983;
+                font-size: 12px;
+            }
+            
+            li {
+                display: inline-block;
+            }
+            
+            .footer-links {
+                width: 765px;
+            }
+            
+            .footer-links li {
+                padding: 0px 10px 0px 0px;
+            }
+        }
+    }
+}

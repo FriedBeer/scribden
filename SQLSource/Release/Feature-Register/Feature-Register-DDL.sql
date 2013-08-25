@@ -24,8 +24,8 @@ END IF;
 
 CREATE TABLE ScribdenUser(
 ScribdenUserKey int unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
-Username varchar(32) NOT NULL,
-Password varchar(32) NOT NULL,
+Username varchar(32) NULL,
+Password varchar(32) NULL,
 Email varchar(255) NOT NULL,
 Active boolean NOT NULL,
 ModDate timestamp NOT NULL
