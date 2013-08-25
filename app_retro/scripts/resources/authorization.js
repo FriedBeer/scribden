@@ -1,25 +1,26 @@
 'use strict';
-angular.module('resources.authorization', ['resources.scribden-resource']).factory('Authorization', ['ScribdenResource', '$cookieStore', '$location', '$http', function (ScribdenResource, $cookieStore, $location, $http) {
+
+angular.module('resources.authorization', ['resources.scribden-resource']).factory('Authorization', ['ScribdenResource', '$cookieStore', '$location', function (ScribdenResource, $cookieStore, $location) {
 
     var Authorization = ScribdenResource('auth');
 
 	var user = $cookieStore.get('user');
 
-	var isSignedIn = function () {
+	Authorization.isSignedIn = function () {
 		return !!this.user;
 	};
 
-	var setUser = function (user) {
+	Authorization.setUser = function (user) {
 		this.user = user;
 		$cookieStore.put('user', user);
 	};
 
-	var removeUser = function () {
+	Authorization.removeUser = function () {
 		this.user = null;
 		$cookieStore.remove('user');
 	};
     
-    var signIn = function (email, password) {
+    Authorization.signIn = function (email, password) {
 		return $http.post(defaultConfig.url + '/signin', {
 			email: email,
 			password: password
@@ -31,7 +32,7 @@ angular.module('resources.authorization', ['resources.scribden-resource']).facto
 		});
 	};
 
-	var signUp = function (email) {
+	Authorization.signUp = function (email) {
 		return $http.post(defaultConfig.url + '/signup', {
 			email: email
 		}).success(function(data) {
@@ -42,7 +43,7 @@ angular.module('resources.authorization', ['resources.scribden-resource']).facto
 		});
 	};
     
-    var signOut = function () {
+    Authorization.signOut = function () {
 		removeUser();
 		$location.path('/');
 		return $http.get(defaultConfig.url + '/signout');

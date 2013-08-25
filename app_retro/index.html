@@ -27,38 +27,36 @@
     <!--<div ng-include="'views/header/header.html'" ng-controller="HeaderCtrl"></div>-->
     <div class="container" ng-view></div>
 
-    <script src="components/tinymce-release/tinymce.min.js"></script>
-    <script src="components/angular/angular.js"></script>
-    <script src="components/angular-resource/angular-resource.js"></script>
-    <script src="components/angular-cookies/angular-cookies.js"></script>
-    <script src="components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-cookies.js"></script>
+    <script src="lib/angular/angular-resource.js"></script>
+    <script src="lib/angular/angular-sanitize.js"></script>
+    <script src="lib/angular/angular-route.js"></script>
     <script src="components/angular-ui-tinymce/src/tinymce.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-2.0.0.min.js"></script>
-    <script src="lib/ur-file/src/ur-file.js"></script>
-    <script src="lib/q/q.js"></script>
-    <script src="lib/underscore-min.js"></script>
-    <script src="scripts/util/md5.min.js"></script>
-    <script src="scripts/util/s3upload.js"></script>
-    <!-- angular-ui 0.2.0 -->
     <script src="components/bootstrap-gh-pages/ui-bootstrap-0.4.0.min.js"></script>
     <script src="components/bootstrap-gh-pages/ui-bootstrap-tpls-0.4.0.min.js"></script>
-
-    <!-- build:js scripts/scripts.js -->
+    <script src="components/tinymce-release/tinymce.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-2.0.0.min.js"></script>
     <script src="index.js"></script>
+    <script src="lib/q/q.js"></script>
+    <script src="lib/underscore-min.js"></script>
+    <script src="lib/ur-file/src/ur-file.js"></script>
+    <script src="scripts/common/interceptor/AuthenticationInterceptor.js"></script>
+    <script src="scripts/resources/authorization.js"></script>
+    <script src="scripts/resources/common-room.js"></script>
+    <script src="scripts/resources/conversation.js"></script>
+    <script src="scripts/resources/image-handler.js"></script>
+    <script src="scripts/resources/post.js"></script>
     <script src="scripts/resources/scribden-resource.js"></script>
     <script src="scripts/resources/user.js"></script>
-    <script src="scripts/resources/common-room.js"></script>
-    <script src="scripts/resources/image-handler.js"></script>
-    <script src="scripts/resources/conversation.js"></script>
-    <script src="scripts/resources/post.js"></script>
-    <script src="scripts/resources/authorization.js"></script>
-    <script src="views/login/login.js"></script>
-    <script src="views/den/den.js"></script>
-    <script src="views/den/manage-common-rooms/manage-common-rooms.js"></script>
-    <script src="views/common-room/common-room.js"></script>
-    <script src="views/conversation/conversation.js"></script>
-    
-    <!-- endbuild -->
+    <script src="scripts/util/md5.min.js"></script>
+    <script src="scripts/util/s3upload.js"></script>
+    <script src="controllers/common-room.js"></script>
+    <script src="controllers/conversation.js"></script>
+    <script src="controllers/den.js"></script>
+    <script src="controllers/header.js"></script>
+    <script src="controllers/login.js"></script>
+    <script src="controllers/manage-common-rooms.js"></script>
 	
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <!--script>
