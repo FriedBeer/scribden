@@ -22,9 +22,9 @@ define("tinymce/dom/ControlSelection", [
 ], function(VK, Tools, Env) {
 	return function(selection, editor) {
 		var dom = editor.dom, each = Tools.each;
-		var selectedElm, selectedElmGhost, resizeHandles, selectedHandle;
+		var selectedElm, selectedElmGhost, resizeHandles, selectedHandle, lastMouseDownEvent;
 		var startX, startY, selectedElmX, selectedElmY, startW, startH, ratio, resizeStarted;
-		var width, height, editableDoc = editor.getDoc(), rootDocument = document, isIE = Env.ie;
+		var width, height, editableDoc = editor.getDoc(), rootDocument = document, isIE = Env.ie && Env.ie < 11;
 
 		// Details about each resize handle how to scale etc
 		resizeHandles = {
@@ -165,8 +165,11 @@ define("tinymce/dom/ControlSelection", [
 		function showResizeRect(targetElm, mouseDownHandleName, mouseDownEvent) {
 			var position, targetWidth, targetHeight, e, rect;
 
+			// Fix when inline element is within a relaive container
+			var offsetParent = editor.getBody().offsetParent || editor.getBody();
+
 			// Get position and size of target
-			position = dom.getPos(targetElm, editor.getBody());
+			position = dom.getPos(targetElm, offsetParent);
 			selectedElmX = position.x;
 			selectedElmY = position.y;
 			rect = targetElm.getBoundingClientRect(); // Fix for Gecko offsetHeight for table with caption
@@ -339,8 +342,8 @@ define("tinymce/dom/ControlSelection", [
 			var target = e.srcElement, pos, name, corner, cornerX, cornerY, relativeX, relativeY;
 
 			pos = target.getBoundingClientRect();
-			relativeX = e.clientX - pos.left;
-			relativeY = e.clientY - pos.top;
+			relativeX = lastMouseDownEvent.clientX - pos.left;
+			relativeY = lastMouseDownEvent.clientY - pos.top;
 
 			// Figure out what corner we are draging on
 			for (name in resizeHandles) {
@@ -358,7 +361,7 @@ define("tinymce/dom/ControlSelection", [
 			// Remove native selection and let the magic begin
 			resizeStarted = true;
 			editor.getDoc().selection.empty();
-			showResizeRect(target, name, e);
+			showResizeRect(target, name, lastMouseDownEvent);
 		}
 
 		function nativeControlSelect(e) {
@@ -422,8 +425,22 @@ define("tinymce/dom/ControlSelection", [
 				});
 
 				attachEvent(editor.getBody(), 'controlselect', nativeControlSelect);
+
+				editor.on('mousedown', function(e) {
+					lastMouseDownEvent = e;
+				});
 			} else {
 				disableGeckoResize();
+
+				if (Env.ie >= 11) {
+					// TODO: Drag/drop doesn't work
+					editor.on('mouseup mousedown', function(e) {
+						if (e.target.nodeName == 'IMG' || editor.selection.getNode().nodeName == 'IMG') {
+							e.preventDefault();
+							editor.selection.select(e.target);
+						}
+					});
+				}
 			}
 
 			editor.on('nodechange mousedown ResizeEditor', updateResizeRect);

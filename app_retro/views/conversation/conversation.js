@@ -4,11 +4,11 @@ angular.module('conversation', ['resources.conversation', 'resources.post', 'ui.
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/conversation/:conversationID', {
-        templateUrl: 'conversation/conversation.html',
+        templateUrl: 'views/conversation/conversation.html',
         controller: 'ConversationCtrl'
       })
       .when('/conversation/common-room/:commonRoomID', {
-        templateUrl: 'conversation/add-conversation.html',
+        templateUrl: 'views/conversation/add-conversation.html',
         controller: 'ConversationAddCtrl'
       })
   }])

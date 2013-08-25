@@ -4,7 +4,7 @@ angular.module('den', ['den.manage-common-rooms'])
      .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/den', {
-                templateUrl: 'den/den.html',
+                templateUrl: 'views/den/den.html',
                 controller: 'DenCtrl'
             });
     }])

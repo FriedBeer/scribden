@@ -23,10 +23,11 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ng-include="'views/header/header.html'" ng-controller="HeaderCtrl"></div>
+    <!-- @TODO: header only works if placed under script tags; gotta find a way around it -->
+    <!--<div ng-include="'views/header/header.html'" ng-controller="HeaderCtrl"></div>-->
     <div class="container" ng-view></div>
 
-    <script src="components/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="components/tinymce-release/tinymce.min.js"></script>
     <script src="components/angular/angular.js"></script>
     <script src="components/angular-resource/angular-resource.js"></script>
     <script src="components/angular-cookies/angular-cookies.js"></script>
@@ -44,21 +45,19 @@
 
     <!-- build:js scripts/scripts.js -->
     <script src="index.js"></script>
-	<script src="scripts/authentication/AuthenticationController.js"></script>
-	<script src="scripts/authentication/AuthenticationModel.js"></script>
-    <script src="scripts/common/interceptor/AuthenticationInterceptor.js"></script>
     <script src="scripts/resources/scribden-resource.js"></script>
     <script src="scripts/resources/user.js"></script>
     <script src="scripts/resources/common-room.js"></script>
     <script src="scripts/resources/image-handler.js"></script>
     <script src="scripts/resources/conversation.js"></script>
     <script src="scripts/resources/post.js"></script>
+    <script src="scripts/resources/authorization.js"></script>
     <script src="views/login/login.js"></script>
     <script src="views/den/den.js"></script>
     <script src="views/den/manage-common-rooms/manage-common-rooms.js"></script>
     <script src="views/common-room/common-room.js"></script>
     <script src="views/conversation/conversation.js"></script>
-    <script src="views/header/header.js"></script>
+    
     <!-- endbuild -->
 	
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

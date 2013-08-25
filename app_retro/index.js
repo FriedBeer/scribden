@@ -7,7 +7,7 @@ angular.module('ScribdenApp', [
     'den',
     'common-room',
     'conversation'
-]).config(function ($routeProvider) {
+]).config(['$routeProvider', '$httpProvider', '$locationProvider', function ($routeProvider, $httpProvider, $locationProvider) {
 	$locationProvider.html5Mode(true);
 
 	$httpProvider.interceptors.push('AuthenticationInterceptor');
@@ -26,16 +26,13 @@ angular.module('ScribdenApp', [
             requireAuthentication: false, // define these at each route
             redirectTo: '/login' // replace with 404
         });
-}).constant('API_PATH', {
+}]).constant('API_PATH', {
     baseURL: '/api/v1/'
-});
-// base url to use when calling the server
-
-app.run(function ($rootScope, $location, AuthenticationModel) {
+}).run(['$rootScope', '$location', 'Authorization', function ($rootScope, $location, Authorization) {
 
 	// Register listener to watch route changes.
 	$rootScope.$on('$routeChangeStart', function (event, next, current) {
-		if (!AuthenticationModel.isSignedIn()) {
+		if (!Authorization.isSignedIn()) {
             // if the user is a guest and they are trying to access a non-public area, redirect them
 			if (!next.redirectTo && next.requireAuthentication) {
 				$location.path('/login');
@@ -47,4 +44,4 @@ app.run(function ($rootScope, $location, AuthenticationModel) {
         }
 	});
 
-});
+}]);

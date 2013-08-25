@@ -1,14 +1,15 @@
 'use strict';
 // handles registration, logging in, and session authentication
-angular.module('login', ['resources.user', 'den', 'ngCookies'])
+angular.module('login', ['resources.user', 'ngCookies'])
+// @TODO: Having multiple route providers is breaking the code for some reason
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/login', {
-        templateUrl: 'login/login.html',
+        templateUrl: 'views/login/login.html',
         controller: 'LoginCtrl'
       })
       .when('/register', {
-        templateUrl: 'login/register.html',
+        templateUrl: 'views/login/register.html',
         controller: 'RegisterCtrl'
       });
   }])

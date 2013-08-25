@@ -1,13 +1,13 @@
 'use strict';
 
-app.controller('HeaderCtrl', function ($scope, $location, $http, ServerUrl, AuthenticationModel) {
-
-	$scope.AuthenticationModel = AuthenticationModel;
-
-	$scope.signOut = function () {
-		AuthenticationModel.removeUser();
-		$location.path('/');
-		return $http.get(ServerUrl + '/api/auth/signout');
-	};
-
-});
+angular.module('header')
+    .controller('HeaderCtrl', ['$scope', '$location', '$http', 'Authorization', function HeaderCtrl($scope, $location, $http, Authorization) {
+        $scope.Authorization = Authorization;
+        
+        $scope.signOut = function () {
+            Authorization.removeUser();
+            $location.path('/');
+            return Authorization.signOut();
+        };
+    
+    }]);

@@ -12,7 +12,7 @@
 
 tinymce.PluginManager.add('image', function(editor) {
 	function getImageSize(url, callback) {
-		var img = new Image();
+		var img = document.createElement('img');
 
 		function done(width, height) {
 			img.parentNode.removeChild(img);
@@ -141,10 +141,12 @@ tinymce.PluginManager.add('image', function(editor) {
 			};
 
 			if (!imgElm) {
-				data.id = '__mcenew';
-				editor.insertContent(dom.createHTML('img', data));
-				imgElm = dom.get('__mcenew');
-				dom.setAttrib(imgElm, 'id', null);
+				editor.undoManager.transact(function() {
+					data.id = '__mcenew';
+					editor.insertContent(dom.createHTML('img', data));
+					imgElm = dom.get('__mcenew');
+					dom.setAttrib(imgElm, 'id', null);
+				});
 			} else {
 				dom.setAttribs(imgElm, data);
 			}
@@ -236,6 +238,8 @@ tinymce.PluginManager.add('image', function(editor) {
 
 			var data = win.toJSON();
 			var css = dom.parseStyle(data.style);
+
+			dom.setAttrib(imgElm, 'style', '');
 
 			delete css.margin;
 			css['margin-top'] = css['margin-bottom'] = addPixelSuffix(data.vspace);

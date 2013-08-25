@@ -14,8 +14,6 @@ passport.use(new LocalStrategy(
                     return done(null, false, { message: 'Incorrect email.' });
                 }
                 else if (value[0].Password != password) {
-                    console.log('err password');
-                    console.log(value[0].Password + ' != ' + password);
                     return done(null, false, { message: 'Incorrect password.' });
                 }
                 else {
@@ -61,7 +59,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-    var deferred = User.getScribdenUserById(id)
+    var deferred = User.getScribdenUserById(id);
     deferred.then(function (value) {
         done(null, value);
     }, function(reason) {

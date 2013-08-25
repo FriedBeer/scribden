@@ -1,7 +1,7 @@
 'use strict';
 
 // Documentation for interceptors here: http://docs.angularjs.org/api/ng.$http
-app.factory('AuthenticationInterceptor', function ($q, $injector) {
+angular.module('common.interceptor.AuthenticationInterceptor', []).factory('AuthenticationInterceptor', ['$q', 'Authorization', function($q, Authorization){
 	return {
 		response: function (response) {
 			// Bypass the success.
@@ -10,8 +10,7 @@ app.factory('AuthenticationInterceptor', function ($q, $injector) {
 		responseError: function (response) {
 			// Sign out if the user is no longer authorized.
 			if (response.status == 401) {
-				var AuthenticationCtrl = $injector.get('AuthenticationCtrl');
-				AuthenticationCtrl.signOut();
+				Authorization.signOut();
 			}
 			
 			return $q.reject(response);
