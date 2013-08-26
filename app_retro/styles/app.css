@@ -6625,7 +6625,52 @@ h3 {
 
 .scribden {
     font-family: courier,courier new,serif;
-    background-color: #705139;
+    background-color: #171124;
+    color: #eada20;
+}
+
+.scribden input[type="text"] {
+    color: #eada20;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    
+    background-color: #171124;
+    border: 2px solid #eada20;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
+.scribden .btn {
+    font-family: courier,courier new,serif;
+    color: #eada20;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    
+    background-color: #171124;
+    border: 2px solid #eada20;
+    background-image: none;
+    background-repeat: no-repeat;
+    
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    text-shadow: none;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
+.scribden .btn:hover {
+    background-color: #eada20;
+    color: #171124;
 }
 
 .scribden .den a {
@@ -6652,7 +6697,7 @@ h3 {
 }
 
 .scribden .hero-unit {
-    background-color: #705139;
+    background-color: #171124;
 }
 
 .scribden .hero-unit h1 {

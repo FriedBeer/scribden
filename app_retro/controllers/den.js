@@ -1,6 +1,13 @@
 'use strict';
 
 angular.module('den', ['den.manage-common-rooms'])
+    .config(['$routeProvider', function ($routeProvider) {
+        $routeProvider
+            .when('/den', {
+                templateUrl: 'views/den/den.html',
+                controller: 'DenCtrl'
+            });
+    }])
     .controller('DenCtrl', [ 'User', 'CommonRoom', '$scope', '$cookieStore', function DenCtrl(User, CommonRoom, $scope, $cookieStore) {
         $scope.commonRooms = {};
         $scope.userid = $cookieStore.get('user_id');

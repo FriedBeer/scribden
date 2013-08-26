@@ -53,6 +53,8 @@ angular.module('resources.scribden-resource', []).factory('ScribdenResource', ['
             angular.extend(this, data);
         };
         
+        Resource.defaultConfig = defaultConfig;
+        
         Resource.query = function(config){
             try {
                var defaultConfigCopy = angular.copy(defaultConfig);

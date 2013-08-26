@@ -1,6 +1,13 @@
 'use strict';
 // handles registration, logging in, and session authentication
 angular.module('den.manage-common-rooms', ['resources.common-room', 'resources.image-handler', 'ngCookies', 'ui.bootstrap', 'ur.file'])
+    .config(['$routeProvider', function ($routeProvider) {
+        $routeProvider
+            .when('/den/manage-common-rooms', {
+                templateUrl: 'views/den/manage-common-rooms/manage-common-rooms.html',
+                controller: 'ManageCommonRoomsCtrl'
+            });
+    }])
   .controller('ManageCommonRoomsCtrl', ['CommonRoom', '$scope', '$cookieStore', '$rootScope', '$dialog', function ManageCommonRoomsCtrl(CommonRoom, $scope, $cookieStore, $rootScope, $dialog) {
       $scope.commonRooms = {};
       $scope.moderatorFilter = '';

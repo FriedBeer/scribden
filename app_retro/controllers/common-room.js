@@ -4,6 +4,17 @@
 // be used as the ng-controller
 // require ngSanitize when using ng-bind-html, they go hand-in-hand
 angular.module('common-room', ['resources.common-room', 'resources.conversation', 'ngCookies', 'ngSanitize'])
+    .config(['$routeProvider', function ($routeProvider) {
+        $routeProvider
+            .when('/common-room/:commonRoomID', {
+                templateUrl: 'common-room/common-room.html',
+                controller: 'CommonRoomCtrl'
+            })
+            .when('/common-room/:commonRoomID/conversation', {
+                templateUrl: 'common-room/view-conversations.html',
+                controller: 'CommonRoomConversationViewCtrl'
+            });
+    }])
   .controller('CommonRoomCtrl', [ 'CommonRoom', '$scope', '$route', '$cookieStore', function CommonRoomCtrl(CommonRoom, $scope, $route, $cookieStore) {
       $scope.userid = $cookieStore.get('user_id');
       

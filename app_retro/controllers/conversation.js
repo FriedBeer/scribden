@@ -1,6 +1,17 @@
 'use strict';
 
 angular.module('conversation', ['resources.conversation', 'resources.post', 'ui.tinymce'])
+    .config(['$routeProvider', function ($routeProvider) {
+        $routeProvider
+            .when('/conversation/:conversationID', {
+                templateUrl: 'views/conversation/conversation.html',
+                controller: 'ConversationCtrl'
+            })
+            .when('/conversation/common-room/:commonRoomID', {
+                templateUrl: 'views/conversation/add-conversation.html',
+                controller: 'ConversationAddCtrl'
+            });
+    }])
   .controller('ConversationCtrl', [ 'Conversation', '$scope', '$cookieStore', function ConversationCtrl(Conversation, $scope, $cookieStore) {
       
   }])

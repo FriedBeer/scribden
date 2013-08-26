@@ -9,9 +9,7 @@ angular.module('ScribdenApp', [
     'common-room',
     'conversation',
     'header'
-]).config(['$routeProvider', '$httpProvider', '$locationProvider', function ($routeProvider, $httpProvider, $locationProvider) {
-	$locationProvider.html5Mode(true);
-
+]).config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 	$httpProvider.interceptors.push('AuthenticationInterceptor');
     /*
     * "The most interesting capability exposed by both XMLHttpRequest and Access Control is
@@ -24,38 +22,6 @@ angular.module('ScribdenApp', [
 	$httpProvider.defaults.withCredentials = true;
     
     $routeProvider
-        .when('/login', {
-            templateUrl: 'views/login/login.html',
-            controller: 'LoginCtrl'
-        })
-        .when('/register', {
-            templateUrl: 'views/login/register.html',
-            controller: 'RegisterCtrl'
-        })
-        .when('/den', {
-            templateUrl: 'views/den/den.html',
-            controller: 'DenCtrl'
-        })
-        .when('/den/manage-common-rooms', {
-            templateUrl: 'views/den/manage-common-rooms/manage-common-rooms.html',
-            controller: 'ManageCommonRoomsCtrl'
-        })
-        .when('/common-room/:commonRoomID', {
-            templateUrl: 'common-room/common-room.html',
-            controller: 'CommonRoomCtrl'
-        })
-        .when('/common-room/:commonRoomID/conversation', {
-            templateUrl: 'common-room/view-conversations.html',
-            controller: 'CommonRoomConversationViewCtrl'
-        })
-        .when('/conversation/:conversationID', {
-            templateUrl: 'views/conversation/conversation.html',
-            controller: 'ConversationCtrl'
-        })
-        .when('/conversation/common-room/:commonRoomID', {
-            templateUrl: 'views/conversation/add-conversation.html',
-            controller: 'ConversationAddCtrl'
-        })
         .otherwise({
             requireAuthentication: false, // define these at each route
             redirectTo: '/login' // replace with 404

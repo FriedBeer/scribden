@@ -1,7 +1,9 @@
 <div class="center hero-unit" ng-controller="LoginCtrl">
     <h1>ScribDen</h1>
     <form id="loginForm" name="loginForm" ng-submit="login()">
-        <input type="text" id="email" name="email" placeholder="Email" ng-model="form.email" />
+        <span>Email:</span>
+        <input type="text" id="email" name="email" ng-model="form.email" />
+        <input type="hidden" id="password" name="password" ng-model="form.password" />
         <br />
         <input type="submit" class="btn" id="login" name="login" value="Login/Register">
     </form>

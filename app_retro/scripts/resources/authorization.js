@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('resources.authorization', ['resources.scribden-resource']).factory('Authorization', ['ScribdenResource', '$cookieStore', '$location', function (ScribdenResource, $cookieStore, $location) {
+angular.module('resources.authorization', ['resources.scribden-resource']).factory('Authorization', ['ScribdenResource', '$cookieStore', '$location', '$http', function (ScribdenResource, $cookieStore, $location, $http) {
 
     var Authorization = ScribdenResource('auth');
 
@@ -21,32 +21,32 @@ angular.module('resources.authorization', ['resources.scribden-resource']).facto
 	};
     
     Authorization.signIn = function (email, password) {
-		return $http.post(defaultConfig.url + '/signin', {
+		return $http.post(Authorization.defaultConfig.url + '/signin', {
 			email: email,
 			password: password
 		}).success(function(data) {
-			setUser(data.user);
+			Authorization.setUser(data.user);
 			$location.path('/den');
 		}).error(function (data) {
-			removeUser();
+			Authorization.removeUser();
 		});
 	};
 
 	Authorization.signUp = function (email) {
-		return $http.post(defaultConfig.url + '/signup', {
+		return $http.post(Authorization.defaultConfig.url + '/signup', {
 			email: email
 		}).success(function(data) {
-			setUser(data.user);
+			Authorization.setUser(data.user);
 			$location.path('/den');
 		}).error(function (data) {
-			removeUser();
+			Authorization.removeUser();
 		});
 	};
     
     Authorization.signOut = function () {
-		removeUser();
+		Authorization.removeUser();
 		$location.path('/');
-		return $http.get(defaultConfig.url + '/signout');
+		return $http.get(Authorization.defaultConfig.url + '/signout');
 	};
     
     return Authorization;

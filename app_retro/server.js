@@ -44,8 +44,8 @@ app.configure(function () {
 });
 
 // Authentication
-app.post(API_PATH + 'auth/signin', apiAuth.signin);
-app.post(API_PATH + 'auth/signup', apiAuth.signout);
+app.post(API_PATH + 'auth/signin', apiAuth.signIn);
+app.post(API_PATH + 'auth/signup', apiAuth.signOut);
 
 // scribden user
 app.get(API_PATH + 'user/email/:email', apiUser.getScribdenUserByEmailProxy);

@@ -5,7 +5,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var signIn = function (req, res) {
 	var user = require('./user.js'),
-		passport = req._passport.instance,
+		passportInstance = req._passport.instance,
         email = req.body.email,
         userPromise = user.getScribdenUserByEmail(email);
     
@@ -13,10 +13,10 @@ var signIn = function (req, res) {
     userPromise.then(function (value) {
         if (value.length === 0) {
             // user does not exist, create it
-            signUp(req, res);
+            signUp(passportInstance, req, res);
         } else {
             // login user
-            login(value[0], req, res);
+            login(passportInstance, value[0], req, res);
         }
     }, function (reason) {
         // error
@@ -24,10 +24,10 @@ var signIn = function (req, res) {
     });    
 };
 
-var signUp = function (req, res) {
+var signUp = function (passportInstance, req, res) {
 	validateEmail(req.body.email, res);
     createUser(email, res).then(function (value) {
-        login(value, req, res);
+        login(passportInstance, value[0], req, res);
     });
 };
 
@@ -61,8 +61,9 @@ var createUser = function (email, res) {
     return deferred;
 };
 
-var login = function (user, req, res) {
-    passport.authenticate('local', function (err, user, info) {
+var login = function (passportInstance, user, req, res) {
+    passportInstance.authenticate('local', function (err, user, info) {
+        console.log(arguments);
         if (err) {
             return res.send(500, err);
         }
@@ -88,11 +89,15 @@ var login = function (user, req, res) {
     })(req, res);
 };
 
-passport.use(new LocalStrategy(
-    function(email, password, done) {
+passport.use(new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password'
+    }, function(email, password, done) {
+        console.log('setting local strategy');
         var userPromise = User.getScribdenUserByEmail(email);
         userPromise.then(function(value) {
             try {
+                console.log(value);
                 if (!value || (value && value.length === 0)) {
                     return done(null, false, { message: 'Incorrect email.' });
                 }
@@ -100,7 +105,8 @@ passport.use(new LocalStrategy(
                     return done(null, false, { message: 'Incorrect password.' });
                 }
                 else {
-                    var user = { id: value[0].ScribdenUserKey, username: value[0].Username, password: value[0].Password };
+                    var user = { id: value[0].ScribdenUserKey, username: value[0].Username, password: value[0].Password, email: value[0].Email };
+                    console.log(user);
                     return done(null, user);
                 }
             } catch(e) {
@@ -108,6 +114,8 @@ passport.use(new LocalStrategy(
                 console.log(e);
             }
         }, function(reason) {
+            console.log('local strategy error');
+            console.log(reason);
             return done(null, false, { message: reason });
         });
     }
@@ -115,16 +123,26 @@ passport.use(new LocalStrategy(
 
 // Serialize
 passport.serializeUser(function(user, done) {
-    done(null, user._id);
+    console.log('serialize');
+    console.log(user);
+    done(null, user.id);
 });
 
 // Deserialize
 passport.deserializeUser(function(id, done) {
-    User.findOne({ _id: id }).exec(function(err, user) {
-        done(err, user);
+    console.log('deserialize');
+    var deferred = User.getScribdenUserById(id);
+    
+    deferred.then(function (value) {
+        console.log('value');
+        done(null, value);
+    }, function(reason) {
+        console.log('error');
+        console.log(reason);
+        done(reason, null);
     });
 });
 
-exports.signin = signIn;
-exports.signout = signOut;
+exports.signIn = signIn;
+exports.signOut = signOut;
 exports.passport = passport;
