@@ -6630,6 +6630,7 @@ h3 {
 }
 
 .scribden input[type="text"] {
+    font-family: courier,courier new,serif;
     color: #eada20;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;

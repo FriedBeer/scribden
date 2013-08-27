@@ -16,7 +16,7 @@ angular.module('common-room', ['resources.common-room', 'resources.conversation'
             });
     }])
   .controller('CommonRoomCtrl', [ 'CommonRoom', '$scope', '$route', '$cookieStore', function CommonRoomCtrl(CommonRoom, $scope, $route, $cookieStore) {
-      $scope.userid = $cookieStore.get('user_id');
+      $scope.userid = $cookieStore.get('user').id;
       
       CommonRoom.query({
           path: $route.current.params.commonRoomID + '/' + $cookieStore.get('user_id')

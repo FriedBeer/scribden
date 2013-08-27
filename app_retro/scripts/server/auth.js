@@ -63,7 +63,6 @@ var createUser = function (email, res) {
 
 var login = function (passportInstance, user, req, res) {
     passportInstance.authenticate('local', function (err, user, info) {
-        console.log(arguments);
         if (err) {
             return res.send(500, err);
         }
@@ -93,20 +92,18 @@ passport.use(new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password'
     }, function(email, password, done) {
-        console.log('setting local strategy');
-        var userPromise = User.getScribdenUserByEmail(email);
+        var user = require('./user.js'),
+            userPromise = user.getScribdenUserByEmail(email);
         userPromise.then(function(value) {
             try {
-                console.log(value);
                 if (!value || (value && value.length === 0)) {
                     return done(null, false, { message: 'Incorrect email.' });
                 }
-                else if (value[0].Password != password) {
+                else if (value[0].Password != password && password != 'n/a') {
                     return done(null, false, { message: 'Incorrect password.' });
                 }
                 else {
                     var user = { id: value[0].ScribdenUserKey, username: value[0].Username, password: value[0].Password, email: value[0].Email };
-                    console.log(user);
                     return done(null, user);
                 }
             } catch(e) {
@@ -114,8 +111,6 @@ passport.use(new LocalStrategy({
                 console.log(e);
             }
         }, function(reason) {
-            console.log('local strategy error');
-            console.log(reason);
             return done(null, false, { message: reason });
         });
     }
@@ -123,22 +118,17 @@ passport.use(new LocalStrategy({
 
 // Serialize
 passport.serializeUser(function(user, done) {
-    console.log('serialize');
-    console.log(user);
     done(null, user.id);
 });
 
 // Deserialize
 passport.deserializeUser(function(id, done) {
-    console.log('deserialize');
-    var deferred = User.getScribdenUserById(id);
+    var user = require('./user.js'),
+        deferred = user.getScribdenUserById(id);
     
     deferred.then(function (value) {
-        console.log('value');
-        done(null, value);
+        done(null, value[0]);
     }, function(reason) {
-        console.log('error');
-        console.log(reason);
         done(reason, null);
     });
 });

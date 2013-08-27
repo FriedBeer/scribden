@@ -19,4 +19,18 @@ angular.module('login', ['resources.user', 'resources.authorization', 'ngCookies
             // authenticate the user and redirect to their den
             Authorization.signIn($scope.form.email, $scope.form.password); // @TODO: Authenticate with password
         };
-    } ]);
+    } ])
+    .controller('RegisterCtrl', [ '$scope', '$cookieStore', '$location', 'User', function RegisterCtrl($scope, $cookieStore, $location, User) {
+        $scope.user = $cookieStore.get('user');
+        $scope.form = {};
+        
+        $scope.update = function () {
+            $scope.user.username = $scope.form.username;
+            User.update({ data: $scope.user,
+                successCallback: function (data) {
+                    $cookieStore.put('user', $scope.user);
+                    $location.path('/den');
+                }
+                });
+        };
+    }]);

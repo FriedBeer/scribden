@@ -13,6 +13,21 @@ var insertScribdenUserProxy = function (req, res) {
     util.initPromiseCallback(promise, res);
 };
 
+var updateScribdenUser = function (user) {
+    var util = require('./sql-util.js');
+    return util.generalQuery('UPDATE ScribdenUser SET Username = ?, ' +
+                                'Password = ?, ' +
+                                'Email = ? ' +
+                                'WHERE ScribdenUserKey = ?',
+                                [user.username, user.password, user.email, user.id]);
+};
+
+var updateScribdenUserProxy = function (req, res) {
+    var util = require('./util.js'),
+        promise = updateScribdenUser(req.body);
+    util.initPromiseCallback(promise, res);
+};
+
 var getScribdenUserByEmail = function (email) {
     var util = require('./sql-util.js');
     return util.generalQuery('SELECT ScribdenUserKey, ' +
@@ -30,6 +45,7 @@ var getScribdenUserByEmail = function (email) {
 var getScribdenUserByEmailProxy = function (req, res) {
     var util = require('./util.js'),
         promise = getScribdenUserByEmail(req.body.email);
+    util.initPromiseCallback(promise, res);
 };
 
 var getScribdenUserById = function (id) {
@@ -55,6 +71,8 @@ var getScribdenUserByIdProxy = function (req, res) {
 
 exports.insertScribdenUser = insertScribdenUser;
 exports.insertScribdenUserProxy = insertScribdenUserProxy;
+exports.updateScribdenUser = updateScribdenUser;
+exports.updateScribdenUserProxy = updateScribdenUserProxy;
 exports.getScribdenUserByEmail = getScribdenUserByEmail;
 exports.getScribdenUserByEmailProxy = getScribdenUserByEmailProxy;
 exports.getScribdenUserById = getScribdenUserById;

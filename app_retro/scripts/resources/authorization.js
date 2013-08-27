@@ -26,7 +26,12 @@ angular.module('resources.authorization', ['resources.scribden-resource']).facto
 			password: password
 		}).success(function(data) {
 			Authorization.setUser(data.user);
-			$location.path('/den');
+            if(data.user.username) {
+                $location.path('/den');
+            } else {
+                // allow user to set username
+                $location.path('/register');
+            }
 		}).error(function (data) {
 			Authorization.removeUser();
 		});

@@ -35,7 +35,7 @@ angular.module('conversation', ['resources.conversation', 'resources.post', 'ui.
 					height : 300
 				};
       
-      $scope.form = { userid: $cookieStore.get('user_id') };
+      $scope.form = { userid: $cookieStore.get('user').id };
       
       $scope.submit = function() {
           $scope.form.content = $scope.tinymceModel;
