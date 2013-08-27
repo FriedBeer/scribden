@@ -1,12 +1,6 @@
 <div class="center hero-unit den" ng-controller="DenCtrl">
-    <div class="header">
-        <div class="left">
-            <h2>{{ user.username }}'s Den</h2>
-        </div>
-        <div class="header-link right">
-            <a href="#/den">Profile</a><span> | </span><a href="#/logout">Logout</a>
-        </div>
-        <div class="clear"></div>
+    <div ng-include="'views/header/header.html'" ng-controller="HeaderCtrl" class="header">
+    
     </div>
     <div class="body">
             <div class="header-link left align-right">

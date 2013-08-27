@@ -6706,7 +6706,7 @@ h3 {
 }
 
 .scribden .den h2 {
-    color: #979983;
+    color: #eada20;
 }
 
 .scribden h3 {
@@ -6745,7 +6745,7 @@ h3 {
 }
 
 .scribden .header-link a, .scribden .header-link span {
-    color: #d8eecf;
+    color: #eada20;
 }
 
 .scribden .footer ul, .scribden .footer a {
@@ -6766,11 +6766,11 @@ h3 {
 }
 
 .scribden .header-link a:hover {
-    color: #ffffff;
+    color: #eada20;
 }
 
 .scribden .header-link .nav-pills .active a {
-    color: #ffffff;
+    color: #eada20;
 }
 
 .scribden .shadow {

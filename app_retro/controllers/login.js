@@ -7,6 +7,9 @@ angular.module('login', ['resources.user', 'resources.authorization', 'ngCookies
                 templateUrl: 'views/login/login.html',
                 controller: 'LoginCtrl'
             })
+            .when('/logout', {
+                controller: 'LogoutCtrl'
+            })
             .when('/register', {
                 templateUrl: 'views/login/register.html',
                 controller: 'RegisterCtrl'
@@ -20,6 +23,9 @@ angular.module('login', ['resources.user', 'resources.authorization', 'ngCookies
             Authorization.signIn($scope.form.email, $scope.form.password); // @TODO: Authenticate with password
         };
     } ])
+    .controller('LogoutCtrl', [ 'Authorization', function LogoutCtrl(Authorization) {
+        Authorization.signOut();
+    }])
     .controller('RegisterCtrl', [ '$scope', '$cookieStore', '$location', 'User', function RegisterCtrl($scope, $cookieStore, $location, User) {
         $scope.user = $cookieStore.get('user');
         $scope.form = {};
