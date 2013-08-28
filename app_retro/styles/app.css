@@ -6629,7 +6629,8 @@ h3 {
     color: #eada20;
 }
 
-.scribden input[type="text"] {
+.scribden input[type="text"],
+          select {
     font-family: courier,courier new,serif;
     color: #eada20;
     -webkit-border-radius: 0px;
@@ -6645,6 +6646,17 @@ h3 {
     -moz-transition: none;
     -o-transition: none;
     transition: none;
+}
+
+.scribden select {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+
+.scribden select option:hover {
+    color: #171124;
+    background-color: #eada20;
 }
 
 .scribden .btn {
@@ -6674,8 +6686,30 @@ h3 {
     color: #171124;
 }
 
-.scribden .den a {
-    font-size: 14px;   
+.scribden .accordion-group {
+    border: none;
+}
+
+.scribden .accordion-heading {
+    color: #eada20;
+    background-color: #171124;
+    border: 2px solid #eada20;
+    background-image: none;
+    background-repeat: no-repeat;
+}
+
+.scribden .accordion-heading:hover {
+    color: #171124;
+    background-color: #eada20;
+    border: 2px solid #eada20;
+    background-image: none;
+    background-repeat: no-repeat;
+}
+
+.scribden .accordion-heading:hover .accordion-toggle {
+    color: #171124;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 .scribden .header-link {
@@ -6693,6 +6727,10 @@ h3 {
     border-bottom-left-radius: 10px;
 }
 
+.scribden .error {
+  color: #e51414;
+}
+
 .scribden .container {
     width: 1020px;
 }
@@ -6705,12 +6743,8 @@ h3 {
     font-size: 38.5px;
 }
 
-.scribden .den h2 {
+.scribden h1, h2, h3 {
     color: #eada20;
-}
-
-.scribden h3 {
-    color: #171124;
 }
 
 .scribden .den .bg-pages {
@@ -6744,7 +6778,7 @@ h3 {
     background-image: url('/styles/images/BGPages_BottomBit.png');   
 }
 
-.scribden .header-link a, .scribden .header-link span {
+.scribden a, .scribden span {
     color: #eada20;
 }
 

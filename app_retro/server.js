@@ -50,6 +50,7 @@ app.post(API_PATH + 'auth/signup', apiAuth.signOut);
 // scribden user
 app.get(API_PATH + 'user/email/:email', apiUser.getScribdenUserByEmailProxy);
 app.get(API_PATH + 'user/:id', apiUser.getScribdenUserByIdProxy);
+app.get(API_PATH + 'user/name/:name', apiUser.getScribdenUserByUsernameProxy);
 app.put(API_PATH + 'user/update', apiUser.updateScribdenUserProxy);
 app.post(API_PATH + 'user', apiUser.insertScribdenUserProxy);
 

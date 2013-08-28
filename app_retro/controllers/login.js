@@ -7,9 +7,6 @@ angular.module('login', ['resources.user', 'resources.authorization', 'ngCookies
                 templateUrl: 'views/login/login.html',
                 controller: 'LoginCtrl'
             })
-            .when('/logout', {
-                controller: 'LogoutCtrl'
-            })
             .when('/register', {
                 templateUrl: 'views/login/register.html',
                 controller: 'RegisterCtrl'
@@ -23,20 +20,29 @@ angular.module('login', ['resources.user', 'resources.authorization', 'ngCookies
             Authorization.signIn($scope.form.email, $scope.form.password); // @TODO: Authenticate with password
         };
     } ])
-    .controller('LogoutCtrl', [ 'Authorization', function LogoutCtrl(Authorization) {
-        Authorization.signOut();
-    }])
     .controller('RegisterCtrl', [ '$scope', '$cookieStore', '$location', 'User', function RegisterCtrl($scope, $cookieStore, $location, User) {
         $scope.user = $cookieStore.get('user');
         $scope.form = {};
         
         $scope.update = function () {
             $scope.user.username = $scope.form.username;
-            User.update({ data: $scope.user,
+            User.query({ 
+                path: 'name/' + $scope.form.username,
                 successCallback: function (data) {
-                    $cookieStore.put('user', $scope.user);
-                    $location.path('/den');
+                    // username is taken
+                    if (data.result && data.result.length > 0) {
+                        $scope.alert = true;
+                    } else {
+                        $scope.alert = false;
+                        // username is available. update user's username
+                        User.update({ data: $scope.user,
+                            successCallback: function (data) {
+                                $cookieStore.put('user', $scope.user);
+                                $location.path('/den');
+                            }
+                            });
+                    }
                 }
-                });
+            });
         };
     }]);

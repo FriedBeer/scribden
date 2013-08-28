@@ -68,6 +68,26 @@ var getScribdenUserByIdProxy = function (req, res) {
     util.initPromiseCallback(promise, res);
 };
 
+var getScribdenUserByUsername = function (username) {
+    var util = require('./sql-util.js');
+    return util.generalQuery('SELECT  ScribdenUserKey, ' +
+                                      'Username, ' +
+                                      'Password, ' +
+                                      'Email, ' +
+                                      'Active, ' +
+                                      'ModDate ' +
+                              'FROM ScribdenUser ' +
+                              'WHERE Username = ? '+
+                                  'AND Active = true',
+                                [username]);
+};
+
+var getScribdenUserByUsernameProxy = function (req, res) {
+    var util = require('./util.js'),
+        promise = exports.getScribdenUserByUsername(req.params.username);
+    util.initPromiseCallback(promise, res);
+};
+
 
 exports.insertScribdenUser = insertScribdenUser;
 exports.insertScribdenUserProxy = insertScribdenUserProxy;
@@ -77,3 +97,5 @@ exports.getScribdenUserByEmail = getScribdenUserByEmail;
 exports.getScribdenUserByEmailProxy = getScribdenUserByEmailProxy;
 exports.getScribdenUserById = getScribdenUserById;
 exports.getScribdenUserByIdProxy = getScribdenUserByIdProxy;
+exports.getScribdenUserByUsername = getScribdenUserByUsername;
+exports.getScribdenUserByUsernameProxy = getScribdenUserByUsernameProxy;

@@ -7,7 +7,8 @@ angular.module('resources.authorization', ['resources.scribden-resource']).facto
 	var user = $cookieStore.get('user');
 
 	Authorization.isSignedIn = function () {
-		return !!user;
+        this.user = $cookieStore.get('user');
+		return !!this.user;
 	};
 
 	Authorization.setUser = function (user) {

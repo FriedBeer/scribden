@@ -3,6 +3,8 @@
     <h1>Welcome to ScribDen!</h1>
     <h2>What's your name?</h2>
     <form id="updateForm" name="updateForm" ng-submit="update()">
+        <span ng-show="alert" class="error">Username is taken.</span>
+        <br />
         <input type="text" id="username" name="username" ng-model="form.username" />
         <br />
         <input type="submit" class="btn" id="submit" name="submit" value="Continue" />

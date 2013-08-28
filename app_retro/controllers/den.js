@@ -5,19 +5,26 @@ angular.module('den', ['den.manage-common-rooms'])
         $routeProvider
             .when('/den', {
                 templateUrl: 'views/den/den.html',
-                controller: 'DenCtrl'
+                controller: 'DenCtrl',
+                requireAuthentication: true
             });
     }])
-    .controller('DenCtrl', [ 'CommonRoom', '$scope', '$cookieStore', function DenCtrl(CommonRoom, $scope, $cookieStore) {
+    .controller('DenCtrl', [ '$scope', '$cookieStore', 'CommonRoom', 'Conversation', function DenCtrl($scope, $cookieStore, CommonRoom, Conversation) {
         $scope.commonRooms = {};
         $scope.user = $cookieStore.get('user');
-      
+        
+        // get user's common rooms
         CommonRoom.query({
             path: 'userid/' + $scope.user.id,
-            successCallback: function (data) {
+            isArray: true,
+            successCallback: function (result) {
                 try {
-                    if (data.result && data.result.length > 0) {
-                        $scope.commonRooms = data.result;
+                    if (result && result.length > 0) {
+                        $scope.commonRooms = result;
+                        
+                        for (var i = 0; i < $scope.commonRooms.length; i++) {
+                            $scope.commonRooms[i].DisplayName = '+ ' + $scope.commonRooms[i].Name;
+                        }
                     } else {
                         $scope.commonRooms = [];
                     }
@@ -27,4 +34,21 @@ angular.module('den', ['den.manage-common-rooms'])
                 }
             }
         });
+        
+        // load recent conversations on demand
+        $scope.loadConversations = function(commonRoom) {
+            if (commonRoom.DisplayName.charAt(0) === '+') {
+                commonRoom.DisplayName = '-' + commonRoom.DisplayName.substring(1);
+                Conversation.query({
+                    path: 'common-room/' + commonRoom.CommonRoomKey,
+                    isArray: true,
+                    successCallback: function(result) {
+                        $scope.conversations[commonRoom.Name] = result;            
+                    }
+                });
+            } else {
+                // hide conversations
+                commonRoom.DisplayName = '+' + commonRoom.DisplayName.substring(1);
+            }
+        };
     }]);
