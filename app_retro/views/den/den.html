@@ -6,7 +6,7 @@
     <div class="body">
         <div id="den-header">
             <div class="left">
-                <select id="actions">
+                <select id="actions" ng-model="action" ng-change="relocate()">
                     <option value="den">Den</option>
                     <option value="common-rooms">CommonRooms</option>
                     <option value="messages">Messages</option>
@@ -20,24 +20,26 @@
         </div>
         <div ng-hide="commonRooms.length">No common rooms</div>
         <div class="common-room" style="text-align: left">
-            <accordion close-others="false">
-                <accordion-group heading="{{ commonRoom.DisplayName }}" ng-repeat="commonRoom in commonRooms" ng-click="loadConversations(commonRoom)" class="cr-header">
-                    <table>
-                        <tbody>
-                            <tr ng-repeat="conversation in conversations[commonRoom.Name]">
-                                <td style="width: 90%">
-                                    <span>{{ conversation.Username }}</span>
-                                    <br />
-                                    <div>{{ conversation.Content }}</div>                                
-                                </td>
-                                <td style="width: 10%">
-                                    <a href="#/conversation/{{ conversation.ConversationKey }}"><h1 class="btn">-></h1></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </accordion-group>
-            </accordion>
+            <div ng-repeat="commonRoom in commonRooms">
+                <div ng-click="loadConversations(commonRoom)" class="cr-header">
+                    <span>{{ commonRoom.isOpenIcon }}</span><a href="#/common-room/{{ commonRoom.CommonRoomKey }}">{{ commonRoom.Name }}</a>
+                </div>
+                <table class="cr-body">
+                    <tbody>
+                        <tr><span ng-hide="(commonRoom.isOpenIcon === '+ ') || conversations[commonRoom.Name].length">Loading...</span></tr>
+                        <tr ng-hide="commonRoom.isOpenIcon ==='+ '" ng-repeat="conversation in conversations[commonRoom.Name]">
+                            <td style="width: 95%">
+                                <span>[{{ conversation.Username }}]</span>
+                                <br />
+                                <div class="content" ng-bind-html="conversation.Content"></div>                                
+                            </td>
+                            <td class="conversation-detail" style="width: 5%">
+                                <a class="c-arrow" href="#/conversation/{{ conversation.ConversationKey }}"><h1>></h1></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

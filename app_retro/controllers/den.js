@@ -9,8 +9,10 @@ angular.module('den', ['den.manage-common-rooms'])
                 requireAuthentication: true
             });
     }])
-    .controller('DenCtrl', [ '$scope', '$cookieStore', 'CommonRoom', 'Conversation', function DenCtrl($scope, $cookieStore, CommonRoom, Conversation) {
+    .controller('DenCtrl', [ '$scope', '$cookieStore', '$location', 'CommonRoom', 'Conversation', function DenCtrl($scope, $cookieStore, $location, CommonRoom, Conversation) {
         $scope.commonRooms = {};
+        $scope.conversations = [];
+        $scope.action = 'den';
         $scope.user = $cookieStore.get('user');
         
         // get user's common rooms
@@ -23,7 +25,7 @@ angular.module('den', ['den.manage-common-rooms'])
                         $scope.commonRooms = result;
                         
                         for (var i = 0; i < $scope.commonRooms.length; i++) {
-                            $scope.commonRooms[i].DisplayName = '+ ' + $scope.commonRooms[i].Name;
+                            $scope.commonRooms[i].isOpenIcon = '+ ';
                         }
                     } else {
                         $scope.commonRooms = [];
@@ -35,10 +37,15 @@ angular.module('den', ['den.manage-common-rooms'])
             }
         });
         
+        // switch pages when making a new selection
+        $scope.relocate = function() {
+            $location.path('/' + $scope.action);
+        };
+        
         // load recent conversations on demand
         $scope.loadConversations = function(commonRoom) {
-            if (commonRoom.DisplayName.charAt(0) === '+') {
-                commonRoom.DisplayName = '-' + commonRoom.DisplayName.substring(1);
+            if (commonRoom.isOpenIcon === '+ ') {
+                commonRoom.isOpenIcon = '- ';
                 Conversation.query({
                     path: 'common-room/' + commonRoom.CommonRoomKey,
                     isArray: true,
@@ -48,7 +55,7 @@ angular.module('den', ['den.manage-common-rooms'])
                 });
             } else {
                 // hide conversations
-                commonRoom.DisplayName = '+' + commonRoom.DisplayName.substring(1);
+                commonRoom.isOpenIcon = '+ ';
             }
         };
     }]);

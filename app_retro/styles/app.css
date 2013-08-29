@@ -6813,6 +6813,62 @@ h3 {
     box-shadow: 1px 4px 4px #000000;
 }
 
+.scribden .den .cr-header {
+    color: #eada20;
+    background-color: #171124;
+    border: 2px solid #eada20;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.scribden .den .cr-header:hover {
+    background-color: #eada20;
+}
+
+.scribden .den .cr-header:hover span, .scribden .den .cr-header:hover a {
+    color: #171124;
+    font-weight: bold;
+}
+
+.scribden .den .cr-body {
+    width: 900px;
+}
+
+.scribden .den .cr-body td {
+    color: #eada20;
+    background-color: #171124;
+    border: 2px solid #eada20;
+    padding: 10px;
+}
+
+.scribden .den .cr-body .conversation-detail {
+    cursor: pointer;
+}
+
+.scribden .den .cr-body .conversation-detail:hover {
+    color: #171124;
+    background-color: #eada20;
+    cursor: pointer;
+}
+
+.scribden .den .cr-body .conversation-detail:hover h1 {
+    color: #171124;
+}
+
+.scribden .den .cr-body .conversation-detail .c-arrow {
+    display: block;
+    width: 100%:
+    height: 100%;
+}
+
+.scribden .den .cr-body .content a {
+    text-decoration: underline;
+}
+
+.scribden .den .cr-body .content a:hover {
+    text-decoration: none;
+}
+
 .scribden .den .in-page .nav {
     height: 30px;
 }
