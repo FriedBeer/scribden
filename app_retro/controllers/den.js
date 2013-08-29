@@ -42,6 +42,11 @@ angular.module('den', ['den.manage-common-rooms'])
             $location.path('/' + $scope.action);
         };
         
+        // replacing href with ng-click to give table cells link behavior
+        $scope.getDetail = function(conversationKey) {
+            $location.path('/conversation/' + conversationKey);
+        };
+        
         // load recent conversations on demand
         $scope.loadConversations = function(commonRoom) {
             if (commonRoom.isOpenIcon === '+ ') {
