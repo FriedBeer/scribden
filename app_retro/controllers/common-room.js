@@ -7,12 +7,14 @@ angular.module('common-room', ['resources.common-room', 'resources.conversation'
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/common-room/:commonRoomID', {
-                templateUrl: 'common-room/common-room.html',
-                controller: 'CommonRoomCtrl'
+                templateUrl: 'views/common-room/common-room.html',
+                controller: 'CommonRoomCtrl',
+                requireAuthentication: false
             })
             .when('/common-room/:commonRoomID/conversation', {
-                templateUrl: 'common-room/view-conversations.html',
-                controller: 'CommonRoomConversationViewCtrl'
+                templateUrl: 'views/common-room/view-conversations.html',
+                controller: 'CommonRoomConversationViewCtrl',
+                requireAuthentication: false
             });
     }])
   .controller('CommonRoomCtrl', [ 'CommonRoom', '$scope', '$route', '$cookieStore', function CommonRoomCtrl(CommonRoom, $scope, $route, $cookieStore) {

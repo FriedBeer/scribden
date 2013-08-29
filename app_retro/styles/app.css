@@ -6654,7 +6654,7 @@ h3 {
     padding: 0;
 }
 
-.scribden select option:hover {
+.scribden select::selection, .scribden select::-moz-selection {
     color: #171124;
     background-color: #eada20;
 }
@@ -6684,32 +6684,6 @@ h3 {
 .scribden .btn:hover {
     background-color: #eada20;
     color: #171124;
-}
-
-.scribden .accordion-group {
-    border: none;
-}
-
-.scribden .accordion-heading {
-    color: #eada20;
-    background-color: #171124;
-    border: 2px solid #eada20;
-    background-image: none;
-    background-repeat: no-repeat;
-}
-
-.scribden .accordion-heading:hover {
-    color: #171124;
-    background-color: #eada20;
-    border: 2px solid #eada20;
-    background-image: none;
-    background-repeat: no-repeat;
-}
-
-.scribden .accordion-heading:hover .accordion-toggle {
-    color: #171124;
-    font-weight: bold;
-    text-decoration: none;
 }
 
 .scribden .header-link {

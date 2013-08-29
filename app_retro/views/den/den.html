@@ -26,7 +26,7 @@
                 </div>
                 <table class="cr-body">
                     <tbody>
-                        <tr><span ng-hide="(commonRoom.isOpenIcon === '+ ') || conversations[commonRoom.Name].length">Loading...</span></tr>
+                        <tr><span ng-hide="(commonRoom.isOpenIcon === '+ ') || conversations[commonRoom.Name].loaded">Loading...</span></tr>
                         <tr ng-hide="commonRoom.isOpenIcon ==='+ '" ng-repeat="conversation in conversations[commonRoom.Name]">
                             <td style="width: 95%">
                                 <span>[{{ conversation.Username }}]</span>

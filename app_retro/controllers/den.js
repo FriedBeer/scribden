@@ -55,7 +55,8 @@ angular.module('den', ['den.manage-common-rooms'])
                     path: 'common-room/' + commonRoom.CommonRoomKey,
                     isArray: true,
                     successCallback: function(result) {
-                        $scope.conversations[commonRoom.Name] = result;            
+                        $scope.conversations[commonRoom.Name] = result;
+                        $scope.conversations[commonRoom.Name].loaded = true;
                     }
                 });
             } else {
