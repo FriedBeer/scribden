@@ -1,13 +1,38 @@
+var getConversationPostsById = function (conversationID) {
+    'use strict';
+    
+    var util = require('./sql-util.js');
+    return util.generalQuery('SELECT    C.ConversationKey, ' +
+                                        'C.fCommonRoomKey, ' +
+                                        'CR.Name, ' +
+                                        'P.PostKey, ' +
+                                        'P.Content, ' +
+                                        'P.fScribdenUserKey, ' +
+                                        'P.ModDate, ' +
+                                        'SU.Username ' +
+                                'FROM   Conversation C ' +
+                                'INNER JOIN Post P ' +
+                                    'ON P.fConversationKey = C.ConversationKey ' +
+                                'INNER JOIN ScribdenUser SU ' +
+                                    'ON SU.ScribdenUserKey = P.fScribdenUserKey ' +
+                                'INNER JOIN CommonRoom CR ' +
+                                    'ON CR.CommonRoomKey = C.fCommonRoomKey ' +
+                                'WHERE C.ConversationKey = ? ' +
+                                    'AND C.Active = true ' +
+                                    'AND P.Active = true ' +
+                                'ORDER BY P.PostKey DESC ',
+                             [conversationID]);
+};
 
-exports.getCommonRoomConversationsProxy = function (req, res) {
+var getConversationPostsByIdProxy = function (req, res) {
     'use strict';
     
     var util = require('./util.js'),
-        promise = exports.getCommonRoomConversations(req.params.commonRoomID);
+        promise = getConversationPostsById(req.params.conversationID);
     util.initPromiseCallback(promise, res);
 };
 
-exports.getCommonRoomConversations = function (commonRoomID) {
+var getCommonRoomConversations = function (commonRoomID) {
     'use strict';
     
     var util = require('./sql-util.js');
@@ -32,15 +57,15 @@ exports.getCommonRoomConversations = function (commonRoomID) {
                                 [commonRoomID]);
 };
 
-exports.insertConversationProxy = function (req, res) {
+var getCommonRoomConversationsProxy = function (req, res) {
     'use strict';
     
     var util = require('./util.js'),
-        promise = exports.insertConversation(req.body.commonRoomID, req.body.isBranch, req.body.isClosed);
+        promise = getCommonRoomConversations(req.params.commonRoomID);
     util.initPromiseCallback(promise, res);
 };
 
-exports.insertConversation = function (commonRoomID, isBranch, isClosed) {
+var insertConversation = function (commonRoomID, isBranch, isClosed) {
     'use strict';
     
     var util = require('./sql-util.js');
@@ -48,3 +73,18 @@ exports.insertConversation = function (commonRoomID, isBranch, isClosed) {
                              'VALUES (?, ?, ?)',
                                 [commonRoomID, isBranch, isClosed]);
 };
+
+var insertConversationProxy = function (req, res) {
+    'use strict';
+    
+    var util = require('./util.js'),
+        promise = insertConversation(req.body.commonRoomID, req.body.isBranch, req.body.isClosed);
+    util.initPromiseCallback(promise, res);
+};
+
+exports.getCommonRoomConversationsProxy = getCommonRoomConversationsProxy;
+exports.getCommonRoomConversations = getCommonRoomConversations;
+exports.insertConversationProxy = insertConversationProxy;
+exports.insertConversation = insertConversation;
+exports.getConversationPostsByIdProxy = getConversationPostsByIdProxy;
+exports.getConversationPostsById = getConversationPostsById;

@@ -14,8 +14,14 @@ angular.module('login', ['resources.user', 'resources.authorization', 'ngCookies
     }])
     .controller('LoginCtrl', [ '$scope', 'Authorization', function LoginCtrl($scope, Authorization) {
         $scope.form = { password: 'n/a' };
+        
         // @TODO: Have password field auto-show when email is filled out if a password is set
         $scope.login = function () {
+            if (!/^(?!undefined)[a-zA-Z0-9._\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{1,3}$/.test($scope.form.email)) {
+                $scope.alert = true;
+                return;
+            }
+            
             // authenticate the user and redirect to their den
             Authorization.signIn($scope.form.email, $scope.form.password); // @TODO: Authenticate with password
         };

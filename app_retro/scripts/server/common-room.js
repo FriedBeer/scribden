@@ -1,13 +1,4 @@
-
-exports.getCommonRoomsByScribdenUserProxy = function (req, res) {
-    'use strict';
-    
-    var util = require('./util.js'),
-        promise = exports.getCommonRoomsByScribdenUser(req.params.userid);
-    util.initPromiseCallback(promise, res);
-};
-
-exports.getCommonRoomsByScribdenUser = function (userid) {
+var getCommonRoomsByScribdenUser = function (userid) {
     'use strict';
     
     var util = require('./sql-util.js');
@@ -31,15 +22,15 @@ exports.getCommonRoomsByScribdenUser = function (userid) {
                                 [userid]);
 };
 
-exports.getUserCommonRoomByIdProxy = function (req, res) {
+var getCommonRoomsByScribdenUserProxy = function (req, res) {
     'use strict';
     
     var util = require('./util.js'),
-        promise = exports.getUserCommonRoomById(req.params.commonRoomID, req.params.userid);
+        promise = getCommonRoomsByScribdenUser(req.params.userid);
     util.initPromiseCallback(promise, res);
 };
 
-exports.getUserCommonRoomById = function (commonRoomID, userid) {
+var getUserCommonRoomById = function (commonRoomID, userid) {
     'use strict';
     
     var util = require('./sql-util.js');
@@ -63,15 +54,15 @@ exports.getUserCommonRoomById = function (commonRoomID, userid) {
                                     [commonRoomID, userid]);
 };
 
-exports.updateCommonRoomProxy = function (req, res) {
+var getUserCommonRoomByIdProxy = function (req, res) {
     'use strict';
     
     var util = require('./util.js'),
-        promise = exports.updateCommonRoom(req.body.commonRoomID, req.body.name, req.body.description, req.body.isPublic, req.body.bannerURL, req.body.homeBGURL);
+        promise = getUserCommonRoomById(req.params.commonRoomID, req.params.userid);
     util.initPromiseCallback(promise, res);
 };
 
-exports.updateCommonRoom = function (commonRoomID, name, description, isPublic, banner, homeBG) {
+var updateCommonRoom = function (commonRoomID, name, description, isPublic, banner, homeBG) {
     'use strict';
     
     var util = require('./sql-util.js'),
@@ -106,19 +97,19 @@ exports.updateCommonRoom = function (commonRoomID, name, description, isPublic, 
         
         return util.generalQuery(query, params);
     } else {
-        return null; // @TODO: Replace these with ORM
+        return null;
     }
 };
 
-exports.insertCommonRoomProxy = function (req, res) {
+var updateCommonRoomProxy = function (req, res) {
     'use strict';
     
     var util = require('./util.js'),
-        promise = exports.insertCommonRoom(req.body.userid, req.body.name, req.body.description, req.body.isPublic, req.body.bannerURL, req.body.homeBGURL);
+        promise = updateCommonRoom(req.body.commonRoomID, req.body.name, req.body.description, req.body.isPublic, req.body.bannerURL, req.body.homeBGURL);
     util.initPromiseCallback(promise, res);
 };
 
-exports.insertCommonRoom = function (userid, name, description, isPublic, banner, homeBG) {
+var insertCommonRoom = function (userid, name, description, isPublic, banner, homeBG) {
     'use strict';
     
     console.log(userid + ',' + name + ',' + description + ',' + isPublic + ',' + banner + ',' + homeBG);
@@ -156,3 +147,20 @@ exports.insertCommonRoom = function (userid, name, description, isPublic, banner
         
     return deferred.promise;
 };
+
+var insertCommonRoomProxy = function (req, res) {
+    'use strict';
+    
+    var util = require('./util.js'),
+        promise = insertCommonRoom(req.body.userid, req.body.name, req.body.description, req.body.isPublic, req.body.bannerURL, req.body.homeBGURL);
+    util.initPromiseCallback(promise, res);
+};
+
+exports.getCommonRoomsByScribdenUserProxy = getCommonRoomsByScribdenUserProxy;
+exports.getCommonRoomsByScribdenUser = getCommonRoomsByScribdenUser;
+exports.getUserCommonRoomByIdProxy = getUserCommonRoomByIdProxy;
+exports.getUserCommonRoomById = getUserCommonRoomById;
+exports.updateCommonRoomProxy = updateCommonRoomProxy;
+exports.updateCommonRoom = updateCommonRoom;
+exports.insertCommonRoomProxy = insertCommonRoomProxy;
+exports.insertCommonRoom = insertCommonRoom;

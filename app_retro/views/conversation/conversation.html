@@ -1,3 +1,38 @@
-<div ng-controller="ConversationViewCtrl">
-    ...Conversations!...
+<div class="center hero-unit conversations" ng-controller="ConversationViewCtrl">
+    <div ng-include="'views/header/header.html'" ng-controller="HeaderCtrl" class="header">
+    
+    </div>
+    <br />
+    <div class="body">
+        <div class="conversations" style="text-align: left">
+            <h1 style="text-align: center"><a href="/common-room/{{ conversation[0].fCommonRoomKey }}">{{ conversation[0].Name }}</a></h1>
+            <br />
+            <a href="/post" class="btn" id="add">Add</a>
+            <br /><br />
+            <div ng-repeat="post in conversation">
+                <table class="c-body">
+                    <tbody>
+                        <tr ng-repeat="post in conversation">
+                            <td style="width: 95%">
+                                <span>[{{ post.Username }}]</span>
+                                <br />
+                                <div class="content" ng-bind-html="post.Content"></div>
+                                <br />
+                                <div id="footer">
+                                    <div class="left"><span>{{ post.Date }}</span></div>
+                                    <div class="right"><span>{{ $index + 1 }}</span></div>
+                                    <div class="clear"></div>
+                                </div>
+                            </td>
+                            <td ng-class="{ 'conversation-detail': !post.fChildConversationKey, 'branched': post.fChildConversationKey }" style="width: 5%" ng-click="branch({{ post.fChildConversationKey }})">
+                                <h1>></h1>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <a href="/post" class="btn" id="add">Add</a>
+        </div>
+    </div>
 </div>

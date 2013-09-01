@@ -21,10 +21,10 @@
         <div ng-hide="commonRooms.length">No common rooms</div>
         <div class="common-room" style="text-align: left">
             <div ng-repeat="commonRoom in commonRooms">
-                <div ng-click="loadConversations(commonRoom)" class="cr-header">
+                <div ng-click="loadConversations(commonRoom)" class="c-header">
                     <span>{{ commonRoom.isOpenIcon }}</span><a href="#/common-room/{{ commonRoom.CommonRoomKey }}">{{ commonRoom.Name }}</a>
                 </div>
-                <table class="cr-body">
+                <table class="c-body">
                     <tbody>
                         <tr><span ng-hide="(commonRoom.isOpenIcon === '+ ') || conversations[commonRoom.Name].loaded">Loading...</span></tr>
                         <tr ng-hide="commonRoom.isOpenIcon ==='+ '" ng-repeat="conversation in conversations[commonRoom.Name]">

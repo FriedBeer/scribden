@@ -6787,7 +6787,7 @@ h3 {
     box-shadow: 1px 4px 4px #000000;
 }
 
-.scribden .den .cr-header {
+.scribden .c-header {
     color: #eada20;
     background-color: #171124;
     border: 2px solid #eada20;
@@ -6795,51 +6795,57 @@ h3 {
     cursor: pointer;
 }
 
-.scribden .den .cr-header:hover {
+.scribden .c-header:hover {
     background-color: #eada20;
 }
 
-.scribden .den .cr-header:hover span, .scribden .den .cr-header:hover a {
+.scribden .c-header:hover span, .scribden .c-header:hover a {
     color: #171124;
     font-weight: bold;
 }
 
-.scribden .den .cr-body {
+.scribden .c-body {
     width: 900px;
 }
 
-.scribden .den .cr-body td {
+.scribden .c-body td {
     color: #eada20;
     background-color: #171124;
     border: 2px solid #eada20;
     padding: 10px;
 }
 
-.scribden .den .cr-body .conversation-detail {
+.scribden .c-body .conversation-detail {
     cursor: pointer;
 }
 
-.scribden .den .cr-body .conversation-detail:hover {
+.scribden .c-body .conversation-detail:hover {
     color: #171124;
     background-color: #eada20;
     cursor: pointer;
 }
 
-.scribden .den .cr-body .conversation-detail:hover h1 {
+.scribden .c-body .branched {
+    color: #171124;
+    background-color: #eada20;
+    cursor: pointer;    
+}
+
+.scribden .c-body .conversation-detail:hover h1 {
     color: #171124;
 }
 
-.scribden .den .cr-body .conversation-detail .c-arrow {
+.scribden .c-body .conversation-detail .c-arrow {
     display: block;
     width: 100%:
     height: 100%;
 }
 
-.scribden .den .cr-body .content a {
+.scribden .c-body .content a {
     text-decoration: underline;
 }
 
-.scribden .den .cr-body .content a:hover {
+.scribden .c-body .content a:hover {
     text-decoration: none;
 }
 

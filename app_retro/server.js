@@ -62,6 +62,7 @@ app.post(API_PATH + 'common-room', apiCommonRoom.insertCommonRoomProxy);
 
 // conversation
 app.get(API_PATH + 'conversation/common-room/:commonRoomID', apiConversation.getCommonRoomConversationsProxy);
+app.get(API_PATH + 'conversation/:conversationID', apiConversation.getConversationPostsByIdProxy);
 app.post(API_PATH + 'conversation', apiConversation.insertConversationProxy);
 
 // post

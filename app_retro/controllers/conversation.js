@@ -5,7 +5,7 @@ angular.module('conversation', ['resources.conversation', 'resources.post', 'ui.
         $routeProvider
             .when('/conversation/:conversationID', {
                 templateUrl: 'views/conversation/conversation.html',
-                controller: 'ConversationCtrl'
+                controller: 'ConversationViewCtrl'
             })
             .when('/conversation/common-room/:commonRoomID', {
                 templateUrl: 'views/conversation/add-conversation.html',
@@ -15,8 +15,30 @@ angular.module('conversation', ['resources.conversation', 'resources.post', 'ui.
   .controller('ConversationCtrl', [ 'Conversation', '$scope', '$cookieStore', function ConversationCtrl(Conversation, $scope, $cookieStore) {
       
   }])
-  .controller('ConversationViewCtrl', [ 'Conversation', '$scope', '$cookieStore', function ConversationViewCtrl(Conversation, $scope, $cookieStore) {
+  .controller('ConversationViewCtrl', [ 'Conversation', '$scope', '$cookieStore', '$route', '$location', function ConversationViewCtrl(Conversation, $scope, $cookieStore, $route, $location) {
+      // get posts for this conversation
+      Conversation.query({
+          path: $route.current.params.conversationID,
+          isArray: true,
+          successCallback: function(result) {
+              $scope.conversation = result;
+              
+              for (var i = 0; i < $scope.conversation.length; i++) {
+                  var date = new Date($scope.conversation[i].ModDate);
+                  $scope.conversation[i].Date = date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear();
+              }
+          }
+      });
       
+      $scope.branch = function (ConversationKey) {
+          // go to branched conversation
+          if (ConversationKey) {
+              $location.path('/conversation/' + ConversationKey);
+          } else {
+              // branch conversation
+              $location.path('/branch/' + $route.current.params.conversationID); // @TODO
+          }
+      };
   }])
   .controller('ConversationAddCtrl', [ 'Conversation', 'Post', '$scope', '$route', '$http', '$cookieStore', '$location', function ConversationAddCtrl(Conversation, Post, $scope, $route, $http, $cookieStore, $location) {
       // @TODO: Check submission content for HTML and do clean up on it
