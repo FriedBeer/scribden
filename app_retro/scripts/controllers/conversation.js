@@ -16,6 +16,8 @@ angular.module('conversation', ['resources.conversation', 'resources.post', 'ui.
       
   }])
   .controller('ConversationViewCtrl', [ 'Conversation', '$scope', '$cookieStore', '$route', '$location', function ConversationViewCtrl(Conversation, $scope, $cookieStore, $route, $location) {
+      $scope.conversationID = $route.current.params.conversationID;
+      
       // get posts for this conversation
       Conversation.query({
           path: $route.current.params.conversationID,

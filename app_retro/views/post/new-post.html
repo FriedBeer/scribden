@@ -1,0 +1,12 @@
+<div ng-controller="PostCtrl">
+    <div ng-include="'views/header/header.html'" ng-controller="HeaderCtrl" class="header">
+    
+    </div>
+    <br />
+    <h1>Adding to the conversation...</h1>
+    <form name="addPostForm" ng-submit="submit()">
+        <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" name="content"></textarea>
+        <br />
+        <input type="submit" class="btn" name="submitBtn" value="Submit" />
+    </form>
+</div>

@@ -38,10 +38,11 @@ angular.module('ui.tinymce', [])
           },
           // Update model when calling setContent (such as from the source editor popup)
           setup: function (ed) {
-            ed.onInit.add(function(ed) {
+            var initAddFn = function (ed) {
               ngModel.$render();
-            });
-            ed.onSetContent.add(function (ed, o) {
+            };
+              
+            var setContentAddFn = function (ed) {
               if (ed.isDirty()) {
                 ed.save();
                 ngModel.$setViewValue(elm.val());
@@ -49,7 +50,10 @@ angular.module('ui.tinymce', [])
                   scope.$apply();
                 }
               }
-            });
+            };
+              
+            ed.on('init', function (e) { initAddFn(ed); });
+            ed.on('SetContent', function (e) { setContentAddFn(ed); });
           },
           mode: 'exact',
           elements: attrs.id

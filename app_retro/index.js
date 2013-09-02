@@ -8,7 +8,8 @@ angular.module('ScribdenApp', [
     'den',
     'common-room',
     'conversation',
-    'header'
+    'header',
+    'post'
 ]).config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 	$httpProvider.interceptors.push('AuthenticationInterceptor');
     /*

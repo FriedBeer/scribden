@@ -7,7 +7,7 @@
         <div class="conversations" style="text-align: left">
             <h1 style="text-align: center"><a href="/common-room/{{ conversation[0].fCommonRoomKey }}">{{ conversation[0].Name }}</a></h1>
             <br />
-            <a href="/post" class="btn" id="add">Add</a>
+            <a href="#/post/conversation/{{ conversationID }}" class="btn" id="add">Add</a>
             <br /><br />
             <div ng-repeat="post in conversation">
                 <table class="c-body">
@@ -32,7 +32,7 @@
                 </table>
             </div>
             <br />
-            <a href="/post" class="btn" id="add">Add</a>
+            <a href="#/post/conversation/{{ conversationID }}" class="btn" id="add">Add</a>
         </div>
     </div>
 </div>
