@@ -3,7 +3,7 @@
  */
 angular.module('ui.tinymce', [])
   .value('uiTinymceConfig', {})
-  .directive('uiTinymce', ['uiTinymceConfig', function (uiTinymceConfig) {
+  .directive('uiTinymce', ['uiTinymceConfig', '$rootScope', function (uiTinymceConfig, $rootScope) {
     uiTinymceConfig = uiTinymceConfig || {};
     var generatedIds = 0;
     return {
@@ -14,6 +14,12 @@ angular.module('ui.tinymce', [])
         if (!attrs.id) {
           attrs.$set('id', 'uiTinymce' + generatedIds++);
         }
+        if (attrs.uiTinymce) {
+          expression = scope.$eval(attrs.uiTinymce);
+        } else {
+          expression = {};
+        }
+        
         options = {
           // Update model on button click
           onchange_callback: function (inst) {
@@ -58,11 +64,7 @@ angular.module('ui.tinymce', [])
           mode: 'exact',
           elements: attrs.id
         };
-        if (attrs.uiTinymce) {
-          expression = scope.$eval(attrs.uiTinymce);
-        } else {
-          expression = {};
-        }
+        
         angular.extend(options, uiTinymceConfig, expression);
         setTimeout(function () {
           tinymce.init(options);

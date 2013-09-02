@@ -6721,6 +6721,11 @@ h3 {
     color: #eada20;
 }
 
+/* reset tinymce text to black */
+.scribden .tinymce-tweaks span, .scribden .mce-container span {
+    color: #000000;
+}
+
 .scribden .den .bg-pages {
     background-color: #f4f4f4;
     background-image: url('/styles/images/BGPages_MiddleBit.png');

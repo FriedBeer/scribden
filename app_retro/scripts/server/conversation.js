@@ -19,8 +19,7 @@ var getConversationPostsById = function (conversationID) {
                                     'ON CR.CommonRoomKey = C.fCommonRoomKey ' +
                                 'WHERE C.ConversationKey = ? ' +
                                     'AND C.Active = true ' +
-                                    'AND P.Active = true ' +
-                                'ORDER BY P.PostKey DESC ',
+                                    'AND P.Active = true ',
                              [conversationID]);
 };
 

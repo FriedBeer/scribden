@@ -9,28 +9,26 @@
             <br />
             <a href="#/post/conversation/{{ conversationID }}" class="btn" id="add">Add</a>
             <br /><br />
-            <div ng-repeat="post in conversation">
-                <table class="c-body">
-                    <tbody>
-                        <tr ng-repeat="post in conversation">
-                            <td style="width: 95%">
-                                <span>[{{ post.Username }}]</span>
-                                <br />
-                                <div class="content" ng-bind-html="post.Content"></div>
-                                <br />
-                                <div id="footer">
-                                    <div class="left"><span>{{ post.Date }}</span></div>
-                                    <div class="right"><span>{{ $index + 1 }}</span></div>
-                                    <div class="clear"></div>
-                                </div>
-                            </td>
-                            <td ng-class="{ 'conversation-detail': !post.fChildConversationKey, 'branched': post.fChildConversationKey }" style="width: 5%" ng-click="branch({{ post.fChildConversationKey }})">
-                                <h1>></h1>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <table class="c-body">
+                <tbody>
+                    <tr ng-repeat="post in conversation">
+                        <td style="width: 95%">
+                            <span>[{{ post.Username }}]</span>
+                            <br />
+                            <div class="content" ng-bind-html="post.Content"></div>
+                            <br />
+                            <div id="footer">
+                                <div class="left"><span>{{ post.Date }}</span></div>
+                                <div class="right"><span>{{ $index + 1 }}</span></div>
+                                <div class="clear"></div>
+                            </div>
+                        </td>
+                        <td ng-class="{ 'conversation-detail': !post.fChildConversationKey, 'branched': post.fChildConversationKey }" style="width: 5%" ng-click="branch({{ post.fChildConversationKey }})">
+                            <h1>></h1>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <br />
             <a href="#/post/conversation/{{ conversationID }}" class="btn" id="add">Add</a>
         </div>

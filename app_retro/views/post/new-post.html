@@ -4,8 +4,8 @@
     </div>
     <br />
     <h1>Adding to the conversation...</h1>
-    <form name="addPostForm" ng-submit="submit()">
-        <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" name="content"></textarea>
+    <form name="addPostForm" ng-submit="submit()" class="tinymce-tweaks">
+        <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" id="content"></textarea>
         <br />
         <input type="submit" class="btn" name="submitBtn" value="Submit" />
     </form>

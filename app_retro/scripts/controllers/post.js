@@ -20,9 +20,11 @@ angular.module('post', ['resources.post', 'ui.tinymce'])
 					],
 					toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
 					autosave_ask_before_unload: false,
+                    resize: false,
 					max_height: 800,
 					min_height: 300,
-					height : 300
+					height : 300,
+                    max_chars: 1200
 				};
       
       $scope.form = { userid: $cookieStore.get('user').id, conversationID: $route.current.params.conversationID };
