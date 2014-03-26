@@ -57,9 +57,9 @@ exports.generalQuery = function(sqlStatement, params, values) {
 
 exports.uploadFile = function(req, res) {
     // @TODO: move to config file
-    var s3BucketName = process.env.PARAM1 || 'elasticbeanstalk-us-east-1-045472282667';
-    var awsAccessKeyID = process.env.AWS_ACCESS_KEY_ID || 'AKIAIHOET2BPVPNPRCDA';
-    var awsSecretKey = process.env.AWS_SECRET_KEY || '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';
+    var s3BucketName = process.env.PARAM1 || '';
+    var awsAccessKeyID = process.env.AWS_ACCESS_KEY_ID || '';
+    var awsSecretKey = process.env.AWS_SECRET_KEY || '';
     
     var shaObj = require('../../lib/jsSHA-release-1.42/src/sha_dev.js');
     var sha = shaObj.sha();
