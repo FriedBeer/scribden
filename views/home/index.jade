@@ -1,0 +1,21 @@
+//- each action can have its own partial view, and use a model to alter the rendered HTML
+//- http://taunus.bevacqua.io/getting-started#using-jade-as-your-view-engine
+div.sd-u-align--center
+  include ../partials/flash
+  include ../partials/home_header
+  main.sd-o-main
+    form(name='loginForm' action='/api/user/login' method='post')
+      div
+        label.sd-c-form__label--medium(for='username') username:
+        input.sd-t-wire.sd-t-wire--field.sd-c-form__field--medium(id='username' name='username' type='text' placeholder='username' required)
+      div
+        label.sd-c-form__label--medium(for='email') email:
+        input.sd-t-wire.sd-t-wire--field.sd-c-form__field--medium(id='email' name='email' type='email' placeholder='email' required)
+      div
+        button.sd-c-btn.sd-t-wire.sd-t-wire-hover.sd-t-wire--field.sd-c-btn(type='submit') Login
+      div
+        a.sd-t-wire.sd-u-align--center(href='/about', aria-label='About') New to ScribDen?
+      div
+        a.sd-t-link.sd-t-wire(href='/register', aria-label='Register') Sign up.
+      div
+        a.sd-t-link.sd-t-wire(href='/recent', aria-label='Browse') Or browse.

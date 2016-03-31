@@ -1,0 +1,41 @@
+include ../partials/app_header
+main.sd-o-main.sd-o-frame-content
+  include ../partials/flash
+  if userId
+    h2 Settings
+    form(name='updateUserInfoForm' method='post' action='api/user')
+      label.sd-t-wire.sd-u-display--block(for='profilePic') Change your profile pic:
+      input(type='file' id='profilePic' name='profilePic')
+      button.sd-c-btn.sd-t-wire.sd-t-wire-hover.sd-t-wire--field(type='submit') Update
+    a.sd-t-wire.sd-u-content-padding--top-bottom(href='/api/user/logout') Logout
+    h2 Donations
+    form(name='donateForm' action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_top')
+      input(type='hidden' name='cmd' value='_xclick-subscriptions')
+      input(type='hidden' name='business' value='B863WBL585QR8')
+      input(type='hidden' name='lc' value='US')
+      input(type='hidden' name='item_name' value='Donate Monthly')
+      input(type='hidden' name='no_note' value='1')
+      input(type='hidden' name='no_shipping' value='1')
+      input(type='hidden' name='src' value='1')
+      input(type='hidden' name='a3' value='1.00')
+      input(type='hidden' name='p3' value='1')
+      input(type='hidden' name='t3' value='M')
+      input(type='hidden' name='currency_code' value='USD')
+      input(type='hidden' name='bn' value='PP-SubscriptionsBF:btn_subscribeCC_LG.gif:NonHosted')
+      p ScribDen runs entirely on our user's donations. We depend on you to help us keep this site running.
+      p If you wish to contribute, please enter an amount below.
+      p.sd-u-align--center
+        input.sd-t-wire.sd-t-wire--field(type='text' name='a3' maxlength='200' required)
+      p.sd-u-align--center
+        input(type='image' src='https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!')
+        img(alt='' border='0' src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif' width='1' height='1')
+      p
+        span This amount will be billed monthly, and can be cancelled at any time, even after just the first month. Just email us at 
+        a.sd-t-wire.sd-t-link(href='mailto:support@scribden.com?subject="Cancel Subscription"') support@scribden.com.
+      p Regardless of whether or not you decide to contribute, you are a part of what makes ScribDen great! Thank you so much for being here! And if you already contribute, thank you! We really appreciate your help!
+  else
+    p.sd-t-wire.sd-u-content-padding--sides
+        a(href='/register').sd-t-wire Register
+        span  or 
+        a(href='/').sd-t-wire login
+        span  to update your account settings.

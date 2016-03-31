@@ -1,0 +1,23 @@
+header
+  if navType === 'main' || (navType === 'thread' && !thread)
+    nav(role='navigation')
+      ul.sd-c-nav
+        li.sd-c-nav-item
+          a.sd-o-nav-icon.sd-o-home-icon(href='/recent', aria-label='See recently updated threads') R
+        li.sd-c-nav-item
+          a.sd-o-nav-icon.sd-o-thread-icon(href='/tracked', aria-label='See tracked threads') T
+        li.sd-c-nav-item
+          a.sd-o-nav-icon.sd-o-notification-icon(href='/notifications', aria-label='See user notifications') N
+        li.sd-c-nav-item
+          a.sd-o-nav-icon.sd-o-settings-icon(href='/settings', aria-label='Modify user settings') S
+  else if navType === 'thread' && thread
+    nav(role='navigation')
+      ul.sd-c-nav
+        li.sd-c-nav-item
+          a.sd-t-wire(href='/recent', aria-label='Go back') Back
+        li.sd-c-nav-right
+          a.sd-t-wire(href='/compose/' + thread.id, aria-label='Make a new post') Compose
+  else
+    h1
+      a.sd-t-link(href='/', aria-label='Go to home') ScribDen
+    h2 The minimalist forum.

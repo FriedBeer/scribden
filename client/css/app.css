@@ -1,0 +1,171 @@
+@charset "UTF-8";
+/*
+Product namespace:
+
+sd
+
+Namespaces:
+
+o-: Signify that something is an Object, and that it may be used in any number of unrelated contexts to the one you can currently see it in. Making modifications to these types of class could potentially have knock-on effects in a lot of other unrelated places. Tread carefully.
+
+c-: Signify that something is a Component. This is a concrete, implementation-specific piece of UI. All of the changes you make to its styles should be detectable in the context you’re currently looking at. Modifying these styles should be safe and have no side effects.
+
+u-: Signify that this class is a Utility class. It has a very specific role (often providing only one declaration) and should not be bound onto or changed. It can be reused and is not tied to any specific piece of UI. You will probably recognise this namespace from libraries and methodologies like SUIT.
+
+t-: Signify that a class is responsible for adding a Theme to a view. It lets us know that UI Components’ current cosmetic appearance may be due to the presence of a theme.
+
+s-: Signify that a class creates a new styling context or Scope. Similar to a Theme, but not necessarily cosmetic, these should be used sparingly—they can be open to abuse and lead to poor CSS if not used wisely.
+
+is-, has-: Signify that the piece of UI in question is currently styled a certain way because of a state or condition. This stateful namespace is gorgeous, and comes from SMACSS. It tells us that the DOM currently has a temporary, optional, or short-lived style applied to it due to a certain state being invoked.
+
+_: Signify that this class is the worst of the worst—a hack! Sometimes, although incredibly rarely, we need to add a class in our markup in order to force something to work. If we do this, we need to let others know that this class is less than ideal, and hopefully temporary (i.e. do not bind onto this).
+
+js-: Signify that this piece of the DOM has some behaviour acting upon it, and that JavaScript binds onto it to provide that behaviour. If you’re not a developer working with JavaScript, leave these well alone.
+
+qa-: Signify that a QA or Test Engineering team is running an automated UI test which needs to find or bind onto these parts of the DOM. Like the JavaScript namespace, this basically just reserves hooks in the DOM for non-CSS purposes.
+ */
+.sd-o-main {
+  margin-top: 2rem; }
+
+.sd-t-default {
+  font-family: Georgia, 'Courier New', serif;
+  background-color: #05052D;
+  color: #fde424;
+  line-height: 1.5rem;
+  margin: 0;
+  font-size: 1rem; }
+
+.sd-t-wire {
+  background-color: #05052D;
+  color: #fde424;
+  font-family: 'Courier New', serif; }
+
+.sd-t-wire-hover:hover,
+.sd-t-wire-hover:focus {
+  background-color: #fde424;
+  color: #05052D;
+  cursor: pointer;
+  font-weight: bold; }
+
+.sd-t-wire--field {
+  border: 0.15rem solid #fde424; }
+
+.sd-t-link {
+  color: #fde424; }
+
+.sd-c-list {
+  padding: 0;
+  margin: 0;
+  list-style: none; }
+
+.sd-c-list > .sd-c-list__item {
+  border-bottom: 0.15rem dashed #fde424; }
+
+.sd-c-list__item__link {
+  width: 100%;
+  display: inline-block;
+  color: #fde424;
+  text-decoration: none; }
+
+.sd-c-list__item__title {
+  display: inline-block;
+  margin-top: 0.25rem;
+  font-size: 1.25rem;
+  padding-left: 1rem; }
+
+.sd-c-list__item__date {
+  float: right;
+  margin-right: 0.5rem;
+  font-size: 0.75rem; }
+
+.sd-c-list__item__description {
+  margin: 0.25rem 0 0.5rem 0;
+  padding-left: 1rem; }
+
+.sd-c-list__item__profile {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: middle;
+  margin: 0.5rem 0.5rem 0 1rem; }
+
+.sd-c-list__item__user {
+  display: inline-block;
+  margin: 0; }
+
+.sd-c-list__item__username {
+  display: inline-block;
+  padding-left: 0.5rem;
+  vertical-align: text-bottom; }
+
+.sd-c-list__item__post {
+  padding-left: 1rem; }
+
+.sd-c-list__item__actions > .sd-c-report {
+  color: #fde424;
+  padding-left: 1rem; }
+
+.sd-c-list__item__actions > .sd-c-reply {
+  color: #fde424;
+  padding-right: 1rem;
+  float: right; }
+
+.sd-c-thread__title {
+  text-align: center;
+  padding-top: 0.5rem; }
+
+.sd-c-thread__description {
+  padding: 0 0.5rem; }
+
+.sd-c-thread__moderation {
+  display: block;
+  text-align: center;
+  border-left: 0.15rem solid #fde424;
+  border-right: 0.15rem solid #fde424; }
+
+.sd-c-thread__ruleset {
+  margin: 0.5rem;
+  font-size: 1rem; }
+
+.sd-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0; }
+
+.sd-sr-only-focusable:active, .sd-sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto; }
+
+.sd-c-nav {
+  position: fixed;
+  border-bottom: 0.15rem solid #fde424;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  list-style: none;
+  background-color: #05052D; }
+
+.sd-c-nav-item {
+  float: left;
+  width: 25%;
+  max-width: 4rem; }
+
+.sd-c-nav-compose {
+  float: right;
+  width: 25%;
+  max-width: 4rem; }
+
+.sd-o-nav-icon {
+  font-size: 1.5rem;
+  color: #fde424; }

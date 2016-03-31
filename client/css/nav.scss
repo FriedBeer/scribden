@@ -1,0 +1,27 @@
+.sd-c-nav {
+    position: fixed;
+    border-bottom: 0.15rem solid $secondaryColor;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    list-style: none;
+    background-color: $primaryColor;
+}
+
+.sd-c-nav-item {
+    float: left;
+    width: 25%;
+    max-width: 4rem;
+}
+
+.sd-c-nav-right {
+    float: right;
+    padding-right: 1rem;
+}
+
+.sd-o-nav-icon {
+    font-size: 1.5rem;
+    color: $secondaryColor;
+}

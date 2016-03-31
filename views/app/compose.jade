@@ -1,0 +1,34 @@
+include ../partials/compose_header
+main.sd-o-main.sd-u-padding--sm
+  include ../partials/flash
+  h1.sd-t-wire=pageTitle
+  ul.sd-c-toolbar.sd-no-js
+    li.sd-c-toolbar__tool
+      button.sd-t-btn--no-style(id='editor_bold' type='button')
+        strong B
+    li.sd-c-toolbar__tool
+      button.sd-t-btn--no-style(id='editor_italic' type='button')
+        em I
+    //- @TODO: Replace with icon images
+    li.sd-c-toolbar__tool
+      button.sd-t-btn--no-style(id='editor_link' type='button') Link
+    //- @TODO: Only for premium members
+    li.sd-c-toolbar__tool
+      button.sd-t-btn--no-style(id='editor_image' type='button') Image
+
+  div.sd-c-toolbar__url.sd-u-hide(id='editor_url')
+    label.sd-u-display--block(for='editor_url_field') url:
+    input.sd-t-wire.sd-t-wire--field.sd-u-display--block(id='editor_url_field' type='text' placeholder='http://')
+    button.sd-c-toolbar__url__btn.sd-t-wire.sd-t-wire-hover.sd-t-wire--field(id='editor_url_btn' type='button') Apply To Text
+  div.sd-c-toolbar__url.sd-u-hide(id='editor_image_url')
+    label.sd-u-display--block(for='editor_image_field') source:
+    input.sd-u-display--block.sd-t-wire.sd-t-wire--field(id='editor_image_field' type='text' placeholder='http://')
+    button.sd-c-toolbar__url__btn.sd-t-wire.sd-t-wire-hover.sd-t-wire--field(id='editor_image_btn' type='button') Add
+
+  //- Replace with the Squire editor if javascript is enabled
+  form(id='new_post_form' name='new_post_form' action=apiUrl method='POST')
+    textarea.sd-c-editor(id='editor' name='content' required)
+    input(type='hidden' name='id' value=id)
+    input(type='hidden' name='threadId' value=threadId)
+    input(type='hidden' name='userId' value=user.id)
+    button.sd-t-wire.sd-t-wire-hover.sd-t-wire--field.sd-o-submit-btn(type='submit') Post

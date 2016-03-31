@@ -1,0 +1,15 @@
+// DEPRECATED
+include ../partials/reply_header
+main.sd-o-main
+  include ../partials/flash
+  ul.sd-c-list
+    each post in thread.posts
+      li.sd-c-list__item
+        span.sd-c-list__item__user
+          span.sd-c-list__item__profile.sd-t-wire--field
+          strong.sd-c-list__item__username.sd-t-wire=post.username
+        span.sd-c-list__item__date.sd-t-wire=post.updated_at
+        div.sd-o-frame-content!=post.content
+        div.sd-c-list__item__actions
+          a.sd-c-reply.sd-t-wire(href='/reply_thread/' + thread.id + '/' + post.replyId) reply
+          a.sd-c-report.sd-t-wire(href='/report/' + thread.id + '/' + post.id) report

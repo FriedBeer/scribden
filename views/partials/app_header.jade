@@ -1,0 +1,16 @@
+header
+  nav(role='navigation')
+    ul.sd-c-nav
+      li.sd-c-nav-item
+        a.sd-o-nav-icon(href='/recent', aria-label='See recently updated threads') R
+      li.sd-c-nav-item
+        a.sd-o-nav-icon(href='/tracked', aria-label='See tracked threads') T
+      //-li.sd-c-nav-item
+        a.sd-o-nav-icon.sd-o-notification-icon(href='/notifications', aria-label='See user notifications') N
+      li.sd-c-nav-item
+        a.sd-o-nav-icon(href='/settings', aria-label='Modify user settings') S
+      li.sd-c-nav-right
+        if userId
+          a.sd-t-wire.sd-t-link(href='/api/user/logout') Logout
+        else
+          a.sd-t-wire.sd-t-link(href='/') Login 

@@ -1,0 +1,6 @@
+if flash
+  - keys = Object.keys(flash)
+
+  each key in keys
+    each message in flash[key]
+      div(class='sd-c-error-header')=message

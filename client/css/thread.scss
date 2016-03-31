@@ -1,0 +1,44 @@
+.sd-o-thread__header {
+    border-bottom: 0.15rem solid $secondaryColor;
+}
+
+.sd-c-thread__title {
+    text-align: center;
+    padding-top: 0.5rem;
+}
+
+.sd-c-thread__description {
+    padding: 0.5rem 1rem;
+}
+
+.sd-c-thread__ruleset {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    padding: 0 1rem;
+    font-size: 1rem;
+}
+
+.sd-c-thread__pagination {
+    display: block;
+    text-align: center;
+    border-bottom: 0.15rem solid $secondaryColor;
+    padding: 0.25rem;
+}
+
+.sd-c-thread__pagination > a {
+    display: inline-block;
+    min-width: 1.5rem;
+    @extend .sd-t-wire
+}
+
+.sd-c-thread__pagination > .is-active {
+    font-size: 1.2rem;
+}
+
+.sd-c-post {
+    display: block;
+}
+
+.sd-c-post a {
+    @extend .sd-t-link;
+}

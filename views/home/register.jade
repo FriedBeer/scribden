@@ -1,0 +1,13 @@
+div.sd-u-align--center
+  include ../partials/flash
+  include ../partials/home_header
+  main.sd-o-main
+    form(name='registerForm' action='/api/user/register' method='post')
+      div
+        label.sd-c-form__label--medium(for='username') username:
+        input.sd-t-wire.sd-t-wire--field(id='username' name='username' type='text' placeholder='username' maxlength='15' pattern='[a-z0-9_-]{3,15}' required)
+      div
+        label.sd-c-form__label--medium(for='email') email:
+        input.sd-t-wire.sd-t-wire--field(id='email' name='email' type='email' placeholder='email' maxlength='254' required)
+      div
+        button.sd-c-btn.sd-t-wire.sd-t-wire-hover.sd-t-wire--field.sd-c-btn(type='submit') Register

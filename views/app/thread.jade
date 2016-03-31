@@ -1,0 +1,67 @@
+include ../partials/thread_header
+main.sd-o-main
+  include ../partials/flash
+  //-h1.sd-c-thread__title.sd-t-wire=thread.name
+  if thread
+    div.sd-o-thread__header
+      p.sd-c-thread__description
+        strong=thread.description
+      a.sd-c-thread__ruleset.sd-t-wire(href='/ruleset')
+        strong Rules: #{thread.ruleset}
+    div.sd-u-align--center
+      if userId
+        a.sd-t-wire.sd-t-wire-hover.sd-c-btn--header(href='/compose/' + thread.id, aria-label='Make a new post')
+          strong Compose
+      else
+        a.sd-t-wire.sd-t-wire-hover.sd-c-btn--header(href='/?referred_from=compose' + thread.id, aria-label='Make a new post')
+          strong Compose
+    if pageCount > 1
+      div.sd-c-thread__pagination
+        span [
+        if pageCount <= 7
+          // show all page links
+          - for (var i = 1; i <= pageCount; i++) {
+              if i === nextPage
+                a.is-active(href='/thread/' + thread.id + '/' + (i - 1)) #{i}
+              else
+                a(href='/thread/' + thread.id + '/' + (i - 1)) #{i}
+          - }
+        else
+          // first/last paginate
+          if nextPage > 1
+            // show in between
+            a(href='/thread/' + thread.id + '/' + (nextPage - 2)) <
+          - for (var i = nextPage; i <= pageCount && i < nextPage + 3; i++) {
+              if i === nextPage
+                a.is-active(href='/thread/' + thread.id + '/' + (i - 1)) #{i}
+              else
+                a(href='/thread/' + thread.id + '/' + (i - 1)) #{i}
+          - }
+          if nextPage !== pageCount
+            // reaching final pages
+            a(href='/thread/' + thread.id + '/' + nextPage) >
+            a(href='/thread/' + thread.id + '/' + (pageCount - 1)) Last
+        span ]
+    ul.sd-c-list
+      if thread.posts
+        each post in thread.posts
+          li.sd-c-list__item.sd-c-list__item--post
+            span.sd-c-list__item__user
+              span.sd-c-list__item__profile.sd-t-wire--field
+              strong.sd-c-list__item__username.sd-t-wire=post.username
+            span.sd-c-list__item__date.sd-t-wire=post.updated_at
+            //if post.replyId
+              p.sd-c-list__item__reply-link.sd-t-wire
+                a(href='/replies/' + thread.id + '/' + post.replyId) See all replies [#{post.replyId}]
+            span.sd-o-frame-content.sd-c-post!=post.content
+            span.sd-c-list__item__actions
+              if userId
+                //a.sd-c-reply.sd-t-wire(href='/reply/' + thread.id + '/' + (post.replyId || post.id)) reply
+                a.sd-c-report.sd-t-wire(href='/report/' + thread.id + '/' + post.id) report
+              else
+                //a.sd-c-reply.sd-t-wire(href='/?referred_from=reply' + thread.id) reply
+                a.sd-c-report.sd-t-wire(href='/?referred_from=report' + thread.id) report
+         if thread.posts.length >= 20
+          li.sd-c-list__item.sd-t-wire-hover
+            a(href='/thread/' + thread.id + '/' + nextPage).sd-c-list__item__link.sd-t-wire
+              p.sd-c-list__item__description.sd-u-align--center More...

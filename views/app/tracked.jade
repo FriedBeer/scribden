@@ -1,0 +1,19 @@
+include ../partials/app_header
+main.sd-o-main
+  include ../partials/flash
+  if threads
+    if threads.length === 0
+      p.sd-t-wire.sd-u-content-padding--sides Track threads, and keep track of their updates here!
+    ul.sd-c-list
+      each thread in threads
+        li.sd-c-list__item
+          a(href='/thread/' + thread.id).sd-c-list__item__link.sd-t-wire.sd-t-wire-hover
+            //-strong.sd-c-list__item__title=thread.name
+            span.sd-c-list__item__date=thread.updated_at
+            p.sd-c-list__item__description=thread.description
+  else if !userId
+    p.sd-t-wire.sd-u-content-padding--sides
+      a(href='/register').sd-t-wire Register
+      span  or 
+      a(href='/').sd-t-wire login
+      span  to keep track of updates for all of your favorite threads!

@@ -1,0 +1,14 @@
+header
+  nav(role='navigation')
+    ul.sd-c-nav
+      li.sd-c-nav-item
+        a.sd-t-wire(href='/recent', aria-label='Go back') Back
+      li.sd-c-nav-right
+        if userId && thread
+          if thread.userId
+            a.sd-t-wire(href='/api/track/remove/' + thread.id, aria-label='Remove thread from list of tracked threads') Untrack
+          else
+            a.sd-t-wire(href='/api/track/' + thread.id, aria-label='Keep track of this thread') Track
+        else if thread
+          //- If the user is not logged in, assume they are a new user, and promote our service
+          a.sd-t-wire(href='/?referred_from=track' + thread.id, aria-label='Keep track of this thread') Track

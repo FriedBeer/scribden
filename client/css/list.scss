@@ -1,0 +1,86 @@
+.sd-c-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    border-top: 0.15rem dashed $secondaryColor;
+}
+
+.sd-c-list > .sd-c-list__item {
+    border-bottom: 0.15rem dashed $secondaryColor;
+}
+
+.sd-c-list__item > .sd-c-list__item__link {
+    margin: 0.25rem 0;
+}
+
+.sd-c-list__item--post {
+    padding-top: 1rem;
+}
+
+.sd-c-list__item__link {
+    width: 100%;
+    display: inline-block;
+    color: $secondaryColor;
+    text-decoration: none;
+}
+
+.sd-c-list__item__title {
+    display: inline-block;
+    width: 68%;
+    margin-top: 0.25rem;
+    font-size: 1.25rem;
+    padding-left: 1rem;
+    word-break: break-word;
+}
+
+.sd-c-list__item__date {
+    float: right;
+    margin: 0 1rem 0 0;
+    font-size: 0.75rem;
+}
+
+.sd-c-list__item__description {
+    padding: 1.25rem 1rem;
+    margin: 0;
+}
+
+.sd-c-list__item__profile {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: middle;
+    margin: 0 0.5rem 0 1rem;
+}
+
+.sd-c-list__item__user {
+    display: inline-block;
+    width: 75%;
+    margin: 0;
+}
+
+.sd-c-list__item__username {
+    display: inline-block;
+    width: 68%;
+    word-break: break-word;
+    padding-left: 0.5rem;
+    vertical-align: text-bottom;
+}
+/*
+.sd-c-list__item__reply-link {
+    padding: 0 1rem;
+    margin: 0 1rem;
+}
+
+.sd-c-list__item__reply-link > a {
+    color: $secondaryColor;
+}
+*/
+.sd-c-list__item__actions {
+    display: block;
+    text-align: right;
+}
+
+.sd-c-list__item__actions > .sd-c-report {
+    color: $secondaryColor;
+    padding-right: 1rem;
+}

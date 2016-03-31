@@ -1,0 +1,25 @@
+include ../partials/generic_header
+main.sd-o-main
+  include ../partials/flash
+  h1.sd-c-thread__title.sd-t-wire New Thread
+  form.sd-u-align--center.sd-o-frame-content(name='loginForm' action='/api/thread' method='post')
+    //-div
+        label.sd-c-form__label--medium(for='threadName') name:
+        input.sd-t-wire.sd-t-wire--field.sd-c-form__field--medium(id='threadName' name='threadName' type='text' placeholder='name' required)
+    div
+      label.sd-c-form__label--medium(for='threadDescription') description:
+      input.sd-t-wire.sd-t-wire--field.sd-c-form__field--medium(id='threadDescription' name='description' type='text' placeholder='description')
+    div
+      label.sd-c-form__label--medium(for='threadRules') community ruleset:
+    fieldset(id='threadRules')
+      input.sd-c-radio-btn(type='radio' id='standard' name='ruleset' value='standard' checked)
+      label(for='standard') standard
+      p.sd-u-align--left For most conversations, these rules will suffice. Best used for general casual conversation. The rule of thumb here is just be respectful towards each other.
+      input(type='radio' id='moderate' name='ruleset' value='moderate')
+      label(for='moderate') moderate
+      p.sd-u-align--left This is for general discussion. Make sure you're adding something to the conversation. Stay on topic and be respectful of others' input.
+      //input(type='radio' id='strict' name='ruleset' value='Strict') strict
+      //label(for='strict') These rules are for
+    div
+      input(type='hidden' name='createdBy' value=user.id)
+      button.sd-c-btn.sd-t-wire.sd-t-wire-hover.sd-t-wire--field.sd-c-btn(type='submit') Create
